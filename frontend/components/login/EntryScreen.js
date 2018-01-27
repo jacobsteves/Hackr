@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from '../../stylesheets/LoginStyles'
 
-export default class LoginScreen extends React.Component {
+export default class EntryScreen extends React.Component {
   constructor(props) {
     super(props);
   }

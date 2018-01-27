@@ -17,14 +17,20 @@ export default class LoginScreen extends React.Component {
 
   onPressLogin() {
     // Do the login
+    const { email, password } = this.state;
+    console.log(email);
+    console.log(password);
+    // Hash stuff,
   }
 
   onUpdateEmail(email) {
-    console.log(email.nativeEvent.text);
+    console.log(email);
+
   }
 
   onUpdatePassword(password) {
-    console.log(password.nativeEvent.text);
+    console.log(password);
+
   }
 
   render() {
@@ -35,14 +41,14 @@ export default class LoginScreen extends React.Component {
           style={styles.text}>Email Address:</Text>
         <TextInput
           style={styles.email}
-          onEndEditing={(email) => this.onUpdateEmail(email)}/>
+          onChangeText={(email) => this.setState({email: email})}/>
         <Text style={styles.text}>Password:</Text>
         <TextInput
           secureTextEntry={true}
           style={styles.password}
-          onEndEditing={(password) => this.onUpdatePassword(password)}/>
+          onChangeText={(password) => this.setState({ password: password})}/>
         <Button
-          onPress={() => onPressLogin()}
+          onPress={() => this.onPressLogin()}
           title='Login'
           style={styles.loginButton}> </Button>
       </View>
