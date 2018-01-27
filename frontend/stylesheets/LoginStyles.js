@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   textInput: {
    margin: 5,
-   width: 60,
+   width: screenWidth,
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
@@ -19,7 +19,7 @@ export default StyleSheet.create({
  },
  email: {
    margin: 5,
-   width: 60,
+   width: screenWidth,
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
@@ -27,7 +27,7 @@ export default StyleSheet.create({
  },
  password: {
    margin: 5,
-   width: 60,
+   width: screenWidth,
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
@@ -41,6 +41,7 @@ export default StyleSheet.create({
     backgroundColor: '#aaaaaa',
   },
   text: {
+    margin: 5,
     fontSize: 18,
   },
 });

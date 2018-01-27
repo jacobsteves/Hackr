@@ -7,24 +7,11 @@ import {
   View,
   Text
 } from 'react-native';
-import styles from '../stylesheets/LoginScreenStyles'
+import styles from '../../stylesheets/LoginStyles'
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
-
-  }
-
-  onPressLogin() {
-    // Do the login
-  }
-
-  onUpdateEmail(email) {
-    console.log(email.nativeEvent.text);
-  }
-
-  onUpdatePassword(password) {
-    console.log(password.nativeEvent.text);
   }
 
   render() {

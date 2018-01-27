@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './components/LoginScreen';
+import LoginScreen from './components/login/LoginScreen';
 
 export default class App extends React.Component {
   render() {
