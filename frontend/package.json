@@ -1,6 +1,6 @@
 {
-  "name": "LitHub",
-  "version": "0.1.0",
+  "name": "Hackr",
+  "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "react-native-scripts": "1.1.0",
