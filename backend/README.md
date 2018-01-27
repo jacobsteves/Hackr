@@ -40,6 +40,9 @@ composer install
 ```
 to install all the dependancies
 
+- copy `.env.example` to `.env`
+     - Note: `.env` is specific to each project, never commit this file
+     
 ## Starting the Server
 - You must generate an application encryption key. Do so by running this command:
 ```
