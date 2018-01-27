@@ -7,27 +7,42 @@ import {
   View,
   Text
 } from 'react-native';
+import styles from '../stylesheets/LoginScreenStyles'
 
-class LoginScreen extends React.Component {
+export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
 
   }
 
-  onPressLogin(props) {
+  onPressLogin() {
     // Do the login
+  }
+
+  onUpdateEmail(email) {
+    console.log(email.nativeEvent.text);
+  }
+
+  onUpdatePassword(password) {
+    console.log(password.nativeEvent.text);
   }
 
   render() {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.text}>Email Address:</Text>
-        <TextInput style={styles.email}> </TextInput>
+        <Text
+          style={styles.text}>Email Address:</Text>
+        <TextInput
+          style={styles.email}
+          onEndEditing={(email) => this.onUpdateEmail(email)}/>
         <Text style={styles.text}>Password:</Text>
-        <TextInput style={styles.password}> </TextInput>
+        <TextInput
+          secureTextEntry={true}
+          style={styles.password}
+          onEndEditing={(password) => this.onUpdatePassword(password)}/>
         <Button
-          onPress={onPressLogin}
+          onPress={() => onPressLogin()}
           title='Login'
           style={styles.loginButton}> </Button>
       </View>
