@@ -14,22 +14,23 @@ export default class EntryScreen extends React.Component {
     super(props);
   }
 
+  onPressLogin() {
+
+  }
+
+  onPressSignup() {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
-
-        <Text
-          style={styles.text}>Email Address:</Text>
-        <TextInput
-          style={styles.email}
-          onEndEditing={(email) => this.onUpdateEmail(email)}/>
-        <Text style={styles.text}>Password:</Text>
-        <TextInput
-          secureTextEntry={true}
-          style={styles.password}
-          onEndEditing={(password) => this.onUpdatePassword(password)}/>
+      <Button
+        onPress={() => this.onPressSignup()}
+        title='Signup'
+        style={styles.loginButton}> </Button>
         <Button
-          onPress={() => onPressLogin()}
+          onPress={() => this.onPressLogin()}
           title='Login'
           style={styles.loginButton}> </Button>
       </View>
