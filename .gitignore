@@ -1,0 +1,26 @@
+frontend/node_modules/
+frontend/.expo/
+frontend/npm-debug.*
+
+backend/composer.phar
+
+backend/vendor/
+backend/node_modules/
+backend/npm-debug.log
+
+# Laravel 4 specific
+backend/bootstrap/compiled.php
+backend/app/storage/
+
+# Laravel 5 & Lumen specific
+backend/public/storage
+backend/public/hot
+backend/storage/*.key
+backend/.env.*.php
+backend/.env.php
+backend/.env
+backend/Homestead.yaml
+backend/Homestead.json
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+backend/.rocketeer/
