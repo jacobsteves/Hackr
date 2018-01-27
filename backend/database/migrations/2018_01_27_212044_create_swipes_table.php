@@ -14,13 +14,13 @@ class CreateSwipesTable extends Migration
     public function up()
     {
         Schema::create('swipes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreign('swiper_id')
-              ->references('id')->on('users');
-            $table->foreign('swipee_id')
-              ->references('id')->on('users');
-            $table->foreign('hackathon_id')
-              ->references('id')->on('hackathons');
+            $table->increments('id')->unsigned();
+            $table->integer('swiper_id')->unsigned();
+            $table->foreign('swiper_id')->references('id')->on('users');
+            $table->integer('swipee_id')->unsigned();
+            $table->foreign('swipee_id')->references('id')->on('users');
+            $table->integer('hackathon_id')->unsigned();
+            $table->foreign('hackathon_id')->references('id')->on('hackathons');
             $table->boolean('said_yes');
             $table->dateTime('swipe_date');
             $table->timestamps();
