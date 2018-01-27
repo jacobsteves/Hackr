@@ -41,7 +41,11 @@ composer install
 to install all the dependancies
 
 ## Starting the Server
-- Run:
+- You must generate an application encryption key. Do so by running this command:
+```
+php artisan key:generate
+```
+- Now start the server:
 ```
 php artisan serve
 ```
