@@ -40,8 +40,15 @@ composer install
 ```
 to install all the dependancies
 
+- copy `.env.example` to `.env`
+     - Note: `.env` is specific to each project, never commit this file
+     
 ## Starting the Server
-- Run:
+- You must generate an application encryption key. Do so by running this command:
+```
+php artisan key:generate
+```
+- Now start the server:
 ```
 php artisan serve
 ```
