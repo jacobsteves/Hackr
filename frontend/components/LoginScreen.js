@@ -14,12 +14,11 @@ class LoginScreen extends React.Component {
 
   }
 
-  function onPressLogin(props) {
+  onPressLogin(props) {
     // Do the login
   }
 
   render() {
-    let styles = {}
     return (
       <View style={styles.container}>
 
@@ -29,8 +28,8 @@ class LoginScreen extends React.Component {
         <TextInput style={styles.password}> </TextInput>
         <Button
           onPress={onPressLogin}
-          title="Login"
-          style{styles.loginButton}> </Button>
+          title='Login'
+          style={styles.loginButton}> </Button>
       </View>
     );
   }
