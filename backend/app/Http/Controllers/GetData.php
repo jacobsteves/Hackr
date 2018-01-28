@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
 
 class GetData extends Controller
 {
@@ -37,22 +38,96 @@ class GetData extends Controller
         //
     }
 
+    private function invalidAuthToken($authToken)
+    {
+        return !(\DB::table('users')->get()->where('auth_token', $authToken)->first());
+    }
+
+    public function addSwipe($request)
+    {
+      if ($this->invalidAuthToken($request->header('auth_token'))) return;
+
+      // swiper_id, swipee_id, hackathon_id, said_yes
+      $newSwipe = new Swipe;
+      $newSwipe->swiper_id = $request->header('swiper_id');
+      $newSwipe->swipee_id = $request->header('swipee_id');
+      $newSwipe->hackathon_id = $request->header('hackathon_id');
+      $newSwipe->said_yes = $request->header('said_yes');
+      $newSwipe->save();
+
+      $match = \DB::select("SELECT id FROM swipes WHERE swipes.swiper_id=$swipee_id AND swipes.swipee_id=$swiper_id");
+
+      if ($match->count()) {
+        $newMatch = new Match;
+        $newMatch->user_one_id = $request->header('swiper_id');
+        $newMatch->user_two_id = $request->header('swipee_id');
+        $newMatch->hackathon_id = $request->header('hackathon_id');
+        $newMatch->save();
+      }
+    }
+
+    public function getUserIdFromToken($authToken)
+    {
+      if ($this->invalidAuthToken($authToken)) return;
+
+      $id = \DB::table('users')->get()->where('auth_token', $authToken)->first()->id;
+      return $id;
+    }
+
+
+    public function saveProfile($request)
+    {
+      if ($this->invalidAuthToken($request->header('auth_token'))) return;
+
+      // swiper_id, swipee_id, hackathon_id, said_yes
+      $id = getUserIdFromToken($request->header('auth_token'));
+      $updatedUser = User::find($id);
+      $updatedUser->content = $request->header('content');
+      $updatedUser->skills = $request->header('skills');
+      $updatedUser->projects = $request->header('projects');
+
+      $usrObj = (object)[];
+      $usrObj->user = $updatedUser;
+
+      $myJSON = json_encode($usrObj);
+
+      return $myJSON;
+    }
+
+    public function getCards($authToken, $hackathonId) {
+      if ($this->invalidAuthToken($authToken)) return;
+
+      $id = $this->getUserIdFromToken($authToken);
+      Log::info("$id");
+      $filteredUsrs = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
+      //$filteredUsrs = \DB::select("SELECT * FROM users LEFT JOIN swipes ON users.id=swipes.swipee_id WHERE users.id=$id");
+      // TODO: Return error if the above query returns nothing (as in, there's no one left!)
+      $usrObj = (object)[];
+      $usrObj->users = $filteredUsrs;
+
+      $myJSON = json_encode($usrObj);
+
+      return $myJSON;
+    }
+
     /**
      * Returns the formatted user object
      *
      * @param  int  $id
      * @return json
      */
-    public function getCards($id)
+    public function getUser($id)
     {
-        $users = \DB::table('users')->get()->where('id', 1)->first();
-        $usrObj = (object)[];
-        $usrObj->name = $users->name;
-        $usrObj->email = $users->email;
+      if ($this->invalidAuthToken($authToken)) return;
 
-        $myJSON = json_encode($usrObj);
+      $users = \DB::table('users')->get()->where('id', 1)->first();
+      $usrObj = (object)[];
+      $usrObj->name = $users->name;
+      $usrObj->email = $users->email;
 
-        return $myJSON;
+      $myJSON = json_encode($usrObj);
+
+      return $myJSON;
     }
 
     /**
@@ -62,14 +137,32 @@ class GetData extends Controller
      */
     public function getHackathons()
     {
-        $hackathons = \DB::table('hackathons')->get();
-        $hackObj = (object)[];
-        $hackObj->hackathons = $hackathons->toArray();
+      $hackathons = \DB::table('hackathons')->get();
+      $hackObj = (object)[];
+      $hackObj->hackathons = $hackathons->toArray();
 
-        $myJSON = json_encode($hackObj);
+      $myJSON = json_encode($hackObj);
 
-        return $myJSON;
+      return $myJSON;
     }
+
+    /**
+     * Returns the matches for a given user
+     *
+     * @return json
+     */
+     public function getMatches($id)
+     {
+       if ($this->invalidAuthToken($authToken)) return;
+
+       $matches = \DB::select("SELECT * FROM matches WHERE user_one_id = $id OR user_two_id = $id" );
+       $matchesObj = (object)[];
+       $matchesObj->matches = $matches;
+
+       $myJSON = json_encode($matchesObj);
+
+       return $myJSON;
+     }
 
     /**
      * Show the form for editing the specified resource.
