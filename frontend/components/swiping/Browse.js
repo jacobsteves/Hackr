@@ -22,6 +22,10 @@ class Browse extends React.Component {
       hackathonId : "0",
       swipeeId: "0",
       modalVisible: false,
+      name: "",
+      moreInfo: "",
+      skills: "",
+      github: "",
     };
   }
 
@@ -80,52 +84,26 @@ class Browse extends React.Component {
         <Text
           style={[styles.name, styles.centerText]}
           numberOfLines={2}
-          minimumFontScale={0.01}>Shaughnessy Cudmore-Keating</Text>
+          minimumFontScale={0.01}>{this.state.name}</Text>
           <View style={styles.line}/>
         <ScrollView>
             <Text
               style={styles.header}>
-              Bio</Text>
+              More Info</Text>
           <Text
-            style={styles.bio}>Haha my name is Jane :)</Text>
+            style={styles.bio}>{this.state.moreInfo}</Text>
 
           <Text
               style={styles.header}>
               Skills</Text>
           <Text
-            style={styles.bio}>I know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
-            Hahaha you should just match with me... I probably accepted
-            you already HAHAHA!!! :D</Text>
+            style={styles.bio}>{this.state.skills}</Text>
 
           <Text
               style={styles.header}>
-              Up for all nighters?</Text>
+              GitHub</Text>
           <Text
-            style={styles.bio}>Yep</Text>
-
-          <Text
-              style={styles.header}>
-              Seriousness</Text>
-          <Text
-            style={styles.bio}>6</Text>
+            style={styles.bio}>{this.state.github}</Text>
         </ScrollView>
 
         <View style={[styles.inline]}>
