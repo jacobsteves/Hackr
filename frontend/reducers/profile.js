@@ -7,7 +7,8 @@ const initialState = {
   authToken: "",
   success: false,
   matched: false,
-  profileSuccess: false
+  profileSuccess: false,
+  matches: []
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -47,6 +48,11 @@ export default function profile(state = initialState, action = {}) {
       return {
         ...state,
         profileSuccess: action.data.success
+      }
+    case types.GET_MATCHES:
+      return {
+        ...state,
+        matches: action.data.matches
       }
     default:
     console.log("default")

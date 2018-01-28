@@ -72,6 +72,12 @@ Log::info("here?4");
         $newMatch->user_one_id = $request->header('swiper_id');
         $newMatch->user_two_id = $request->header('swipee_id');
         $newMatch->save();
+
+        $newMatch2 = new Match;
+        $newMatch2->user_one_id = $request->header('swipee_id');
+        $newMatch2->user_two_id = $request->header('swiper_id');
+        $newMatch2->save();
+
         $rtnObj->matched = true;
         Log::info("here?6");
       }
@@ -92,25 +98,30 @@ Log::info("here?4");
 
     public function updateProfile($request)
     {
+      Log::info("got ehre");
+      Log::info($request->header('auth_token'));
       if ($this->invalidAuthToken($request->header('auth_token'))) return;
       // swiper_id, swipee_id, hackathon_id, said_yes
       $id = $this->getUserIdFromToken($request->header('auth_token'));
+      Log::info("got ehre 2");
       $updatedUser = User::find($id);
       $updatedUser->contact = $request->header('contact');
       $updatedUser->skills = $request->header('skills');
       $updatedUser->projects = $request->header('projects');
       $updatedUser->save();
+      Log::info("got ehre 3");
 
       $usrObj = (object)[];
       $usrObj->user = $updatedUser;
       $usrObj->success = true;
       $myJSON = json_encode($usrObj);
+      Log::info("got ehre4");
       return $myJSON;
     }
 
     public function getCards($results) {
       $authToken = $results->header('auth_token');
-
+      Log::info("$authToken");
       if ($this->invalidAuthToken($authToken)) return;
       $id = $this->getUserIdFromToken($authToken);
       $filteredCards = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
@@ -183,16 +194,20 @@ Log::info("here?4");
      *
      * @return json
      */
-     public function getMatches($id)
+     public function getMatches($response)
      {
+       Log::info("data here");
+       $authToken = $response->header('auth_token');
+       $id = $response->header('user_id');
+       Log::info("data here 2 $response->headers");
        if ($this->invalidAuthToken($authToken)) return;
-
-       $matches = \DB::select("SELECT * FROM matches WHERE user_one_id = $id OR user_two_id = $id" );
+Log::info("data here 3");
+       $matches = \DB::select("SELECT users.name, matches.user_two_id, users.contact FROM matches JOIN users ON matches.user_two_id=users.id WHERE user_one_id = $id" );
        $matchesObj = (object)[];
        $matchesObj->matches = $matches;
 
        $myJSON = json_encode($matchesObj);
-
+       Log::info("data here 4");
        return $myJSON;
      }
 

@@ -1,11 +1,12 @@
 import * as types from './ActionTypes';
 import { AsyncStorage } from 'react-native';
 
-export function getMatches(userId) {
+export function getMatches(userId, authToken) {
   return function(dispatch) {
     fetch(types.APP_BACKEND_URL + "/api/getMatches", {
       headers: {
-        'userId': userId,
+        'user_id': userId,
+        'auth_token': authToken
       }
     }).then((response) => response.json())
     .then((responseJson) => {
