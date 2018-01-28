@@ -37,13 +37,31 @@ class GetData extends Controller
         //
     }
 
+    public function getUserIdFromToken($authToken)
+    {
+        $id = \DB::table('users')->get()->where('auth_token', $authToken)->first();
+        return $id;
+    }
+
+    public function getCards($authToken, $hackathonId) {
+      $id = getUserIdFromToken(authToken);
+      $filteredUsrs = \DB::select("SELECT * FROM users LEFT JOIN swipes ON user.id=swipes.swiper_id WHERE swipes.swipee_id IS NULL  LIMIT 30")
+      // TODO: Return error if the above query returns nothing (as in, there's no one left!)
+      $usrObj = (object)[];
+      $usrObj->users = $filteredUsrs->toArray();
+
+      $myJSON = json_encode($usrObj);
+
+      return $myJSON
+    }
+
     /**
      * Returns the formatted user object
      *
      * @param  int  $id
      * @return json
      */
-    public function getCards($id)
+    public function getUser($id)
     {
         $users = \DB::table('users')->get()->where('id', 1)->first();
         $usrObj = (object)[];
@@ -70,6 +88,22 @@ class GetData extends Controller
 
         return $myJSON;
     }
+
+    /**
+     * Returns the matches for a given user
+     *
+     * @return json
+     */
+     public function getMatches($id)
+     {
+       $matches = \DB::select("SELECT * FROM matches WHERE user_one_id = $id OR user_two_id = $id" );
+       $matchesObj = (object)[];
+       $matchesObj->matches = $matches->toArray();
+
+       $myJSON = json_encode($matchesObj);
+
+       return $myJSON;
+     }
 
     /**
      * Show the form for editing the specified resource.
