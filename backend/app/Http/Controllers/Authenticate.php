@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
+use App\User;
+use Illuminate\Support\Facades\Log;
 
 class Authenticate extends Controller
 {
@@ -99,21 +102,33 @@ class Authenticate extends Controller
       return "$myJSON";
     }
 
-    public function signup($data)
+    public function signup(Request $data)
     {
-      $email = $data->email;
-      $name = $data->name;
-      $password = Hash::make($password);
-      $authToken = Hash::make($email);
+      $email = $data->header('email');
+      $name = $data->header('name');
+      $password = Hash::make($data->header('password'));
+      $authToken = Hash::make("$email");
 
       $myObj = (object)[];
-      $myObj->name = $users->name;
-      $myObj->email = $users->email;
+      $myObj->name = "$name";
+      $myObj->email = "$email";
 
       $sessionData = (object)[];
       $sessionData->userData = $myObj;
-      $sessionData->authToken = "$auth_token";
+      $sessionData->authToken = "$authToken";
       $sessionData->data = "$data";
+
+
+      // Create the new user instance
+      $user = new User;
+      $user->name = "$name";
+      $user->email = "$email";
+      $user->password = "$password";
+      $user->auth_token = "$authToken";
+      $user->contact = "";
+      $user->skills = "";
+      $user->projects = "";
+      $user->save();
 
       $myJSON = json_encode($sessionData);
 
