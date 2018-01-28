@@ -8,6 +8,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 30,
+    width: screenWidth,
+    height: screenHeight,
   },
   textInput: {
    margin: 5,
@@ -16,29 +18,22 @@ export default StyleSheet.create({
    borderWidth: 0.5,
    borderColor: '#d6d7da',
    textAlign: 'center',
- },
- email: {
-   margin: 5,
-   width: screenWidth,
-   borderRadius: 4,
-   borderWidth: 0.5,
-   borderColor: '#d6d7da',
-   textAlign: 'center',
- },
- password: {
-   margin: 5,
-   width: screenWidth,
-   borderRadius: 4,
-   borderWidth: 0.5,
-   borderColor: '#d6d7da',
-   textAlign: 'center',
- },
- button: {
-    width: screenWidth,
-    height: 50,
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor: '#aaaaaa',
+  },
+  button: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  inline: {
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    flexDirection:'row',
+  },
+  alignLeft: {
+    paddingLeft: screenWidth * 0.01,
+  },
+  alignRight: {
+    alignSelf: 'flex-end',
+    paddingLeft: screenWidth * 0.09,
   },
   text: {
     margin: 5,
@@ -50,9 +45,23 @@ export default StyleSheet.create({
     fontSize: screenWidth * 0.04,
   },
   name: {
-    fontSize: screenWidth * 0.15,
+    fontSize: screenWidth * 0.09,
     fontWeight: 'bold',
     alignSelf: 'center',
+  },
+  header: {
+    fontSize: screenWidth * 0.07,
+    fontWeight: 'bold',
+    paddingLeft: screenWidth * 0.01,
+    paddingTop: screenWidth * 0.05,
+  },
+  centerText: {
+    textAlign:"center",
+    textAlignVertical:"center",
+  },
+  line: {
+    borderBottomColor: 'grey',
+    borderBottomWidth: 0.5,
   },
   square: {
     width: screenWidth * 0.8,

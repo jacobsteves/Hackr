@@ -7,6 +7,8 @@ import {
   View,
   Text,
   Picker,
+  Image,
+  TouchableHighlight,
 } from 'react-native';
 import styles from '../../stylesheets/BrowseStyles';
 
@@ -45,13 +47,39 @@ export default class Browse extends React.Component {
           <Picker.Item label="Hack the North" value="1000000" />
         </Picker>
 
+        <View style={styles.line}/>
+
         <Text
-          style={styles.name}
+          style={[styles.name, styles.centerText]}
           numberOfLines={2}
-          adjustsFontSizeToFit={true}
           minimumFontScale={0.01}>Shaughnessy Cudmore-Keating</Text>
+          <View style={styles.line}/>
+          <Text
+            style={styles.header}>
+            Bio</Text>
         <Text
           style={styles.bio}>Haha my name is Jane :)</Text>
+
+        <Text
+            style={styles.header}>
+            Skills</Text>
+        <Text
+          style={styles.bio}>I know C#, PHP, and JavaScript very well!!!</Text>
+
+          <TouchableHighlight
+            style={[styles.button, styles.alignRight, styles.inline]} onPress={this._onPressButton}>
+            <Image
+              resizeMode='contain'
+              style={[]}
+              source={require('../../images/checkmark.png')}/>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={[styles.button, styles.alignLeft, styles.inline]} onPress={this._onPressButton}>
+            <Image
+              resizeMode='contain'
+              style={[]}
+              source={require('../../images/cross.png')}/>
+          </TouchableHighlight>
       </View>
     );
   }
