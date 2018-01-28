@@ -84,7 +84,7 @@ Log::info("here?4");
 
       $myJSON = json_encode($rtnObj);
       Log::info("here?7 $myJSON");
-      return $myJSON;
+      return "$myJSON";
     }
 
     public function getUserIdFromToken($auth_token)
@@ -116,7 +116,7 @@ Log::info("here?4");
       $usrObj->success = true;
       $myJSON = json_encode($usrObj);
       Log::info("got ehre4");
-      return $myJSON;
+      return "$myJSON";
     }
 
     public function getCards($results) {
@@ -131,7 +131,7 @@ Log::info("here?4");
       $usrObj->cards = $filteredCards;
       $myJSON = json_encode($usrObj);
 
-      return $myJSON;
+      return "$myJSON";
     }
 
     /**
@@ -151,7 +151,7 @@ Log::info("here?4");
 
       $myJSON = json_encode($usrObj);
 
-      return $myJSON;
+      return "$myJSON";
     }
 
     /**
@@ -167,7 +167,7 @@ Log::info("here?4");
 
       $myJSON = json_encode($hackObj);
 
-      return $myJSON;
+      return "$myJSON";
     }
 
     /**
@@ -187,7 +187,7 @@ Log::info("here?4");
         $cards = \DB::select("SELECT * FROM cards INNER JOIN swipes ON swipes.swiper_id <> $user_id WHERE cards.user_id <> $user_id AND cards.hackathon_id = $hackathon_id");
         $myJSON = json_encode($cards);
 
-        return $myJSON;
+        return "$myJSON";
     }
 
      /** Returns the matches for a given user
@@ -208,7 +208,7 @@ Log::info("data here 3");
 
        $myJSON = json_encode($matchesObj);
        Log::info("data here 4");
-       return $myJSON;
+       return "$myJSON";
      }
 
     /**

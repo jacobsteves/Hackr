@@ -78,6 +78,7 @@ class Browse extends React.Component {
   onPressDeny() {
     console.log('Denied ' + this.state.swipeeId);
     console.log('userDataID:' + this.props.userData.id);
+    let pos = this.state.position;
     let json = {
       'auth_token': this.props.auth_token,
       'swiper_id': this.props.userData.id,
@@ -87,9 +88,17 @@ class Browse extends React.Component {
     }
     this.props.actions.addSwipe(json);
     this.setState({
-      position: this.state.position++
+      position: pos + 1
     });
-
+    if (pos + 1 === this.state.cards.length) {
+      let auth = {
+        "auth_token": this.props.auth_token,
+      };
+      this.setState({
+        position: 0
+      });
+      this.props.actions.getCards(auth);
+    }
   }
 
   closeModal() {
