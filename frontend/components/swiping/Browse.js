@@ -12,7 +12,7 @@ import {
   ScrollView,
   Modal,
 } from 'react-native';
-import { addSwipe } from '../../actions/ProfileActions'
+import { addSwipe, getCards } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/BrowseStyles';
 
 class Browse extends React.Component {
@@ -26,15 +26,24 @@ class Browse extends React.Component {
       moreInfo: "",
       skills: "",
       github: "",
+      cards: []
     };
   }
 
   componentDidMount() {
     console.log("mounted!");
+    let userData = {
+      'authToken': this.props.authToken
+    }
+    this.props.actions.getCards(userData);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.matched) {
       this.setState({ modalVisible: true });
+    }
+    if (nextProps.cards !== this.state.cards) {
+      this.setState({ cards: nextProps.cards });
+      console.log(nextProps.cards)
     }
   }
 
@@ -133,14 +142,16 @@ function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
     authToken: state.profile.authToken,
-    matched: state.profile.matched
+    matched: state.profile.matched,
+    cards: state.profile.cards
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      addSwipe
+      addSwipe,
+      getCards
     }, dispatch)
   };
 }
