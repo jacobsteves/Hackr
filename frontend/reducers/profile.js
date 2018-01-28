@@ -6,7 +6,8 @@ const initialState = {
   userData: "",
   authToken: "",
   success: false,
-  matched: false
+  matched: false,
+  profileSuccess: false
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -41,6 +42,11 @@ export default function profile(state = initialState, action = {}) {
       return {
         ...state,
         cards: action.data.cards
+      }
+    case types.UPDATE_PROFILE:
+      return {
+        ...state,
+        profileSuccess: action.data.success
       }
     default:
     console.log("default")

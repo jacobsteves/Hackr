@@ -37,6 +37,6 @@ Route::get('/addSwipe', function (Request $request) {
     return App::make('App\Http\Controllers\GetData')->addSwipe($request);
 });
 
-Route::get('/saveProfile', function (Request $request) {
-    return App::make('App\Http\Controllers\GetData')->saveProfile($request);
+Route::get('/updateProfile', function (Request $request) {
+    return App::make('App\Http\Controllers\GetData')->updateProfile($request);
 });

@@ -113,3 +113,26 @@ export function getCards(userData) {
     })
   };
 }
+
+export function updateProfile(userData) {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/updateProfile", {
+      headers: {
+        'auth_token': userData.auth_token,
+        "skills": userData.skills,
+        "contact": JSON.stringify(userData.contact),
+        "projects": userData.projects,
+      }
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      dispatch({
+        type: types.UPDATE_PROFILE,
+        data: responseJson
+      });
+    })
+    .catch((error) => {
+      console.error('error ' + error);
+    })
+  };
+}

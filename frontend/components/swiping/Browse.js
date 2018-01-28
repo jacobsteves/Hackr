@@ -38,6 +38,7 @@ class Browse extends React.Component {
     }
     this.props.actions.getCards(userData);
   }
+  
   componentWillReceiveProps(nextProps) {
     if (nextProps.matched) {
       this.setState({ modalVisible: true });
@@ -166,8 +167,8 @@ class Browse extends React.Component {
                     source={require('../../images/checkmark.png')}/>
                 </TouchableHighlight>
             </View>
-          }
-        </View>
+          </View>
+        }
       </View>
     );
   }

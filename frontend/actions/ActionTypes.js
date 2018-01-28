@@ -4,3 +4,4 @@ export const LOGIN = 'LOGIN';
 export const SIGNUP = 'SIGNUP';
 export const ADD_SWIPE = 'ADD_SWIPE';
 export const GET_CARDS = 'GET_CARDS';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';

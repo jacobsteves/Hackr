@@ -83,22 +83,21 @@ class GetData extends Controller
     }
 
 
-    public function saveProfile($request)
+    public function updateProfile($request)
     {
       if ($this->invalidAuthToken($request->header('auth_token'))) return;
-
       // swiper_id, swipee_id, hackathon_id, said_yes
-      $id = getUserIdFromToken($request->header('auth_token'));
+      $id = $this->getUserIdFromToken($request->header('auth_token'));
       $updatedUser = User::find($id);
-      $updatedUser->content = $request->header('content');
+      $updatedUser->contact = $request->header('contact');
       $updatedUser->skills = $request->header('skills');
       $updatedUser->projects = $request->header('projects');
+      $updatedUser->save();
 
       $usrObj = (object)[];
       $usrObj->user = $updatedUser;
-
+      $usrObj->success = true;
       $myJSON = json_encode($usrObj);
-
       return $myJSON;
     }
 
