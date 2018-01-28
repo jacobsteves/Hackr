@@ -28,7 +28,7 @@ export default StyleSheet.create({
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
  password: {
    margin: 5,
@@ -36,7 +36,7 @@ export default StyleSheet.create({
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
  bottomButton: {
     flex: 1,
