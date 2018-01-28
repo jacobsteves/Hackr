@@ -25,10 +25,7 @@ class SignupScreen extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    console.log(nextProps.success);
     if (nextProps.success) {
-      console.log("success");
       this.props.changeView('EditProfileScreen')
     }
   }

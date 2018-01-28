@@ -27,12 +27,7 @@ class MatchesScreen extends React.Component {
   componentWillMount() {
     let id = this.props.userData.id;
     let auth = this.props.auth_token;
-    console.log(auth);
     this.props.actions.getMatches(id, auth);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.matches)
   }
 
   render() {
@@ -41,7 +36,7 @@ class MatchesScreen extends React.Component {
         <Button
           onPress={() => this.props.changeView("Browse")}
           title="Go back to browse" />
-          
+
         <Text style={styles.header}>My matches</Text>
         <View style={styles.line}/>
         {this.props.matches && this.props.matches.map((value, key) => (

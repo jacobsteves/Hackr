@@ -137,7 +137,6 @@ class Authenticate extends Controller
 
       $sessionData->success = true;
       $myJSON = json_encode($sessionData);
-      Log::info("this token in signup: $auth_token");
       return "$myJSON";
     }
 }

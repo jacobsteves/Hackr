@@ -38,8 +38,6 @@ class LoginScreen extends React.Component {
   onPressLogin() {
     // Do the login
     const { email, password } = this.state;
-    console.log(email);
-    console.log(password);
     if (email === "") {
       displayAlert("No Email", "Please enter your email");
       return;

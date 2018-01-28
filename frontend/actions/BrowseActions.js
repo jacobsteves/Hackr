@@ -10,7 +10,6 @@ export function getMatches(userId, auth_token) {
       }
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       dispatch({
         type: types.GET_MATCHES,
         data: responseJson

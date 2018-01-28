@@ -24,7 +24,6 @@ class EditProfileScreen extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profileSuccess) {
-      console.log("success?")
       this.props.changeView("Browse");
     }
   }

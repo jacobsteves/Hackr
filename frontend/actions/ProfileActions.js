@@ -11,7 +11,6 @@ export function login(userData) {
       }
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       dispatch({
         type: types.LOGIN,
         data: responseJson
@@ -33,14 +32,12 @@ export function signup(userData) {
       }
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       dispatch({
         type: types.SIGNUP,
         data: responseJson
       });
     })
     .catch((error) => {
-      console.error('error ' + error);
       return { 'success': false };
     })
   };
@@ -79,7 +76,6 @@ export function getCards(userData) {
       }
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       dispatch({
         type: types.GET_CARDS,
         data: responseJson
@@ -102,7 +98,6 @@ export function updateProfile(userData) {
       }
     }).then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
       dispatch({
         type: types.UPDATE_PROFILE,
         data: responseJson

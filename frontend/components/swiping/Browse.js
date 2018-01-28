@@ -32,7 +32,6 @@ class Browse extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mounted!");
     let userData = {
       'auth_token': this.props.auth_token
     }
@@ -45,13 +44,10 @@ class Browse extends React.Component {
     }
     if (nextProps.cards !== this.state.cards) {
       this.setState({ cards: nextProps.cards });
-      console.log(nextProps.cards)
     }
   }
 
   onPressAccept() {
-    console.log('Accepted ' + this.state.swipeeId);
-    console.log('userDataID:' + this.props.userData.id);
     let pos = this.state.position;
     let json = {
       'auth_token': this.props.auth_token,
@@ -76,8 +72,6 @@ class Browse extends React.Component {
   }
 
   onPressDeny() {
-    console.log('Denied ' + this.state.swipeeId);
-    console.log('userDataID:' + this.props.userData.id);
     let pos = this.state.position;
     let json = {
       'auth_token': this.props.auth_token,
