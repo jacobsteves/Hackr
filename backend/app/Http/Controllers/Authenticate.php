@@ -92,6 +92,7 @@ class Authenticate extends Controller
       $userData = (object)[];
       $userData->userData = $myObj;
       $userData->authToken = "";
+      $userData->data = "$data";
 
       $myJSON = json_encode($userData);
 

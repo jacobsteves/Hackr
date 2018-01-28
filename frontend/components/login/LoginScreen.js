@@ -24,7 +24,12 @@ class LoginScreen extends React.Component {
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
-    this.props.actions.login();
+    let userData = {
+      "email": email,
+      "name": "Jacob Steves",
+      "password": password
+    }
+    this.props.actions.login(userData);
     // Hash stuff,
   }
 
