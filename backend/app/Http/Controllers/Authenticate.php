@@ -118,7 +118,6 @@ class Authenticate extends Controller
       $sessionData->authToken = "$authToken";
       $sessionData->data = "$data";
 
-
       // Create the new user instance
       $user = new User;
       $user->name = "$name";
@@ -130,6 +129,7 @@ class Authenticate extends Controller
       $user->projects = "";
       $user->save();
 
+      $sessionData->success = true;
       $myJSON = json_encode($sessionData);
 
       return "$myJSON";

@@ -1,11 +1,9 @@
-import $ from 'jquery';
 import * as types from './ActionTypes';
 import { AsyncStorage } from 'react-native';
 
 export function login(userData) {
-  return {
-    type: types.LOGIN,
-    data: fetch(types.APP_BACKEND_URL + "/api/login", {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/login", {
       headers: {
         'email': userData.email,
         'name': userData.name,
@@ -14,7 +12,10 @@ export function login(userData) {
     }).then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
-      return responseJson;
+      dispatch({
+        type: types.LOGIN,
+        data: responseJson
+      });
     })
     .catch((error) => {
       console.error('error ' + error);
@@ -23,9 +24,8 @@ export function login(userData) {
 }
 
 export function signup(userData) {
-  return {
-    type: types.SIGNUP,
-    data: fetch(types.APP_BACKEND_URL + "/api/signup", {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/signup", {
       headers: {
         'email': userData.email,
         'name': userData.name,
@@ -34,10 +34,14 @@ export function signup(userData) {
     }).then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
-      return responseJson;
+      dispatch({
+        type: types.SIGNUP,
+        data: responseJson
+      });
     })
     .catch((error) => {
       console.error('error ' + error);
+      return { 'success': false };
     })
   };
 }

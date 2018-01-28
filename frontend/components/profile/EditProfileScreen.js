@@ -68,4 +68,10 @@ export default class EditProfileScreen extends React.Component {
       </View>
     );
   }
+
+  render() {
+    return (
+      <View></View>
+    )
+  }
 }
