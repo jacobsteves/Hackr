@@ -199,15 +199,9 @@ Log::info("here?4");
        Log::info("data here");
        $auth_token = $response->header('auth_token');
        $id = $response->header('user_id');
-       Log::info("data here 2 $response->headers");
        if ($this->invalidauth_token($auth_token)) return;
-Log::info("data here 3");
-       $matches = \DB::select("SELECT users.name, matches.user_two_id, users.contact FROM matches JOIN users ON matches.user_two_id=users.id WHERE user_one_id = $id" );
-       $matchesObj = (object)[];
-       $matchesObj->matches = $matches;
-
-       $myJSON = json_encode($matchesObj);
-       Log::info("data here 4");
+       $matches = \DB::select("SELECT users.name, matches.user_two_id, users.email FROM matches JOIN users ON matches.user_two_id=users.id WHERE user_one_id = $id" );
+       $myJSON = json_encode($matches);
        return "$myJSON";
      }
 

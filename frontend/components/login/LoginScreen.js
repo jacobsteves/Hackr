@@ -49,7 +49,6 @@ class LoginScreen extends React.Component {
     }
     let userData = {
       "email": email,
-      "name": "Jacob Steves",
       "password": password
     }
     this.props.actions.login(userData);

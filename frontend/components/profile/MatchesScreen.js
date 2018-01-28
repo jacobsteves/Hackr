@@ -43,8 +43,9 @@ class MatchesScreen extends React.Component {
         <View style={styles.line}/>
         {this.props.matches && this.props.matches.map((value) => (
           <View>
-            <Text>{value.name}</Text>
-            <Text>{JSON.parse(value.contact).phone}</Text>
+            <Text>Name: {value.name}</Text>
+            <Text>Email: {value.email}</Text>
+            <View style={styles.line}/>
           </View>
         ))}
       </View>
