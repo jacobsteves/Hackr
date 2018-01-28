@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,4 +14,14 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/getCards/{id}', 'GetCards@show');
+
+Route::get('/login', function (Request $request) {
+    return App::make('App\Http\Controllers\Authenticate')->login($request);
+});
+
+Route::get('/signup', function (Request $request) {
+    return App::make('App\Http\Controllers\Authenticate')->signup($request);
 });
