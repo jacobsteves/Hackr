@@ -66,4 +66,14 @@ export default StyleSheet.create({
   selector: {
     alignSelf: 'center',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'grey',
+  },
+  innerContainer: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    height: 100
+  },
 });

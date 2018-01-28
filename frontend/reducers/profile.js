@@ -6,6 +6,7 @@ const initialState = {
   userData: "",
   authToken: "",
   success: false,
+  matched: false
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -30,6 +31,11 @@ export default function profile(state = initialState, action = {}) {
         authToken: action.data.token,
         userData: action.data.userData,
         success: action.data.success,
+      }
+    case types.ADD_SWIPE:
+      return {
+        ...state,
+        matched: action.data.matched,
       }
     default:
     console.log("default")
