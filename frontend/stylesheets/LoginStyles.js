@@ -9,6 +9,11 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: 30,
   },
+  mainLogo: {
+    width: screenWidth,
+    flex:2,
+
+  },
   textInput: {
    margin: 5,
    width: screenWidth,
@@ -33,6 +38,15 @@ export default StyleSheet.create({
    borderColor: '#d6d7da',
    textAlign: 'center',
  },
+ bottomButton: {
+    flex: 1,
+    width: screenWidth,
+    height: 75,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: '#aaaaaa',
+  },
  button: {
     width: screenWidth,
     height: 50,
