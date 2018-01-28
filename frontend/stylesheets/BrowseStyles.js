@@ -6,7 +6,6 @@ const screenHeight = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 30,
     width: screenWidth,
     height: screenHeight,
@@ -24,16 +23,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   inline: {
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
     flexDirection:'row',
-  },
-  alignLeft: {
-    paddingLeft: screenWidth * 0.01,
-  },
-  alignRight: {
-    alignSelf: 'flex-end',
-    paddingLeft: screenWidth * 0.09,
+    alignSelf: 'center',
   },
   text: {
     margin: 5,
@@ -50,18 +41,21 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
   header: {
-    fontSize: screenWidth * 0.07,
+    fontSize: screenWidth * 0.06,
     fontWeight: 'bold',
     paddingLeft: screenWidth * 0.01,
-    paddingTop: screenWidth * 0.05,
+    // paddingTop: screenWidth * 0.05,
   },
   centerText: {
     textAlign:"center",
     textAlignVertical:"center",
   },
   line: {
-    borderBottomColor: 'grey',
-    borderBottomWidth: 0.5,
+    borderBottomColor: 'blue',
+    borderBottomWidth: 2,
+  },
+  highlight: {
+    opacity: 1,
   },
   square: {
     width: screenWidth * 0.8,

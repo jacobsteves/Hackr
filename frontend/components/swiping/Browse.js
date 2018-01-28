@@ -9,6 +9,7 @@ import {
   Picker,
   Image,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 import styles from '../../stylesheets/BrowseStyles';
 
@@ -16,26 +17,17 @@ export default class Browse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hackathonId : "0"
+      hackathonId : "0",
+      swipeeId: "0",
     };
   }
 
-  onPressLogin() {
-    // Do the login
-    const { email, password } = this.state;
-    console.log(email);
-    console.log(password);
-    // Hash stuff,
+  onPressAccept() {
+    console.log('Accepted ' + this.state.swipeeId);
   }
 
-  onUpdateEmail(email) {
-    console.log(email);
-
-  }
-
-  onUpdatePassword(password) {
-    console.log(password);
-
+  onPressDeny() {
+    console.log('Denied ' + this.state.swipeeId);
   }
 
   render() {
@@ -48,38 +40,75 @@ export default class Browse extends React.Component {
         </Picker>
 
         <View style={styles.line}/>
-
         <Text
           style={[styles.name, styles.centerText]}
           numberOfLines={2}
           minimumFontScale={0.01}>Shaughnessy Cudmore-Keating</Text>
           <View style={styles.line}/>
+        <ScrollView>
+            <Text
+              style={styles.header}>
+              Bio</Text>
           <Text
-            style={styles.header}>
-            Bio</Text>
-        <Text
-          style={styles.bio}>Haha my name is Jane :)</Text>
+            style={styles.bio}>Haha my name is Jane :)</Text>
 
-        <Text
-            style={styles.header}>
-            Skills</Text>
-        <Text
-          style={styles.bio}>I know C#, PHP, and JavaScript very well!!!</Text>
+          <Text
+              style={styles.header}>
+              Skills</Text>
+          <Text
+            style={styles.bio}>I know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :DI know C#, PHP, and JavaScript very well!!!
+            Hahaha you should just match with me... I probably accepted
+            you already HAHAHA!!! :D</Text>
 
-          <TouchableHighlight
-            style={[styles.button, styles.alignRight, styles.inline]} onPress={this._onPressButton}>
-            <Image
-              resizeMode='contain'
-              style={[]}
-              source={require('../../images/checkmark.png')}/>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={[styles.button, styles.alignLeft, styles.inline]} onPress={this._onPressButton}>
-            <Image
-              resizeMode='contain'
-              style={[]}
-              source={require('../../images/cross.png')}/>
-          </TouchableHighlight>
+          <Text
+              style={styles.header}>
+              Up for all nighters?</Text>
+          <Text
+            style={styles.bio}>Yep</Text>
+
+          <Text
+              style={styles.header}>
+              Seriousness</Text>
+          <Text
+            style={styles.bio}>6</Text>
+        </ScrollView>
+
+        <View style={[styles.inline]}>
+            <TouchableHighlight
+              onPress = {() => this.onPressDeny()}
+              style={[styles.highlight]}>
+              <Image
+                resizeMode='contain'
+                style={[]}
+                source={require('../../images/cross.png')}/>
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress = {() => this.onPressAccept()}
+              style={[styles.highlight]}>
+              <Image
+                resizeMode='contain'
+                style={[]}
+                source={require('../../images/checkmark.png')}/>
+            </TouchableHighlight>
+        </View>
       </View>
     );
   }
