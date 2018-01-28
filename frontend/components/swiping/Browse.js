@@ -108,6 +108,9 @@ class Browse extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <Button
+          onPress={() => this.props.changeView("MatchesScreen")}
+          title="Go to matches" />
         <Modal
           visible={this.state.modalVisible}
           animationType={'slide'}
@@ -159,12 +162,7 @@ class Browse extends React.Component {
                   style={styles.header}>
                   GitHub</Text>
               <Text
-                style={styles.bio}>{this.state.cards[this.state.position].contact.github}</Text>
-                <Button
-                    onPress={() => this.props.changeView("MatchesScreen")}
-                    title="Go to matches"
-                >
-                </Button>
+                style={styles.bio}>{this.state.cards[this.state.position].contact.github || ""}</Text>
             </ScrollView>
 
             <View style={[styles.inline]}>
