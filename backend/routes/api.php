@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/getCards/{id}', 'GetData@getCards');
 Route::get('/getHackathons', 'GetData@getHackathons');
+Route::get('/getSwipees', function (Request $request) {
+    return App::make('App\Http\Controllers\GetData')->getSwipees($request);
+});
 
 Route::get('/login', function (Request $request) {
     return App::make('App\Http\Controllers\Authenticate')->login($request);
