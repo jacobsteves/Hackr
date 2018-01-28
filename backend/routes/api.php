@@ -16,7 +16,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/getCards/{id}', 'GetData@getCards');
 Route::get('/getHackathons', 'GetData@getHackathons');
 Route::get('/getSwipees', function (Request $request) {
     return App::make('App\Http\Controllers\GetData')->getSwipees($request);
@@ -31,13 +30,13 @@ Route::get('/signup', function (Request $request) {
 });
 
 Route::get('/getCards', function (Request $request) {
-    return App::make('App\Http\Controllers\GetData')->getCards('$2y$10$YjqCvf9IIdty9a6m1rFSS.LQR9RYInzw9lUEOK6j6OtdB1bm0cgBG', 1);
+    return App::make('App\Http\Controllers\GetData')->getCards($request);
 });
 
 Route::get('/addSwipe', function (Request $request) {
     return App::make('App\Http\Controllers\GetData')->addSwipe($request);
 });
 
-Route::get('/saveProfile', function (Request $request) {
-    return App::make('App\Http\Controllers\GetData')->saveProfile($request);
+Route::get('/updateProfile', function (Request $request) {
+    return App::make('App\Http\Controllers\GetData')->updateProfile($request);
 });

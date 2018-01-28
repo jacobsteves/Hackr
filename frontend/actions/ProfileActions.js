@@ -50,9 +50,11 @@ export function addSwipe(swipeData) {
   return function(dispatch) {
     fetch(types.APP_BACKEND_URL + "/api/addSwipe", {
       headers: {
-        'swiper_id': userData.swiper_id,
-        'swipee_id': userData.swipee_id,
-        'hackathon_id': userData.hackathon_id
+        'auth_token': swipeData.auth_token,
+        'swiper_id': swipeData.swiper_id,
+        'swipee_id': swipeData.swipee_id,
+        'hackathon_id': swipeData.hackathon_id,
+        'said_yes': swipeData.said_yes
       }
     }).then((response) => response.json())
     .then((responseJson) => {
@@ -89,6 +91,49 @@ export function saveProfileData(profileData) {
     .catch((error) => {
       console.error('error ' + error);
       return { 'success': false };
+    })
+  };
+}
+
+export function getCards(userData) {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/getCards", {
+      headers: {
+        'auth_token': userData.authToken
+      }
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      dispatch({
+        type: types.GET_CARDS,
+        data: responseJson
+      });
+    })
+    .catch((error) => {
+      console.error('error ' + error);
+    })
+  };
+}
+
+export function updateProfile(userData) {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/updateProfile", {
+      headers: {
+        'auth_token': userData.auth_token,
+        "skills": userData.skills,
+        "contact": JSON.stringify(userData.contact),
+        "projects": userData.projects,
+      }
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      dispatch({
+        type: types.UPDATE_PROFILE,
+        data: responseJson
+      });
+    })
+    .catch((error) => {
+      console.error('error ' + error);
     })
   };
 }

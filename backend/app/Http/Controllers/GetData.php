@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Log;
+use App\User;
+use App\Swipe;
 
 class GetData extends Controller
 {
@@ -40,30 +42,43 @@ class GetData extends Controller
 
     private function invalidAuthToken($authToken)
     {
-        return !(\DB::table('users')->get()->where('auth_token', $authToken)->first());
+        // return !(\DB::table('users')->get()->where('auth_token', $authToken)->exists());
+        return !(User::where('auth_token', '=', "$authToken")->exists());
     }
 
     public function addSwipe($request)
     {
+      Log::info("here?");
+      Log::info($request->header('auth_token'));
       if ($this->invalidAuthToken($request->header('auth_token'))) return;
-
+      Log::info("here?2");
       // swiper_id, swipee_id, hackathon_id, said_yes
       $newSwipe = new Swipe;
       $newSwipe->swiper_id = $request->header('swiper_id');
       $newSwipe->swipee_id = $request->header('swipee_id');
-      $newSwipe->hackathon_id = $request->header('hackathon_id');
+      $newSwipe->hackathon_id = 1;
       $newSwipe->said_yes = $request->header('said_yes');
       $newSwipe->save();
+      Log::info("here?3");
 
-      $match = \DB::select("SELECT id FROM swipes WHERE swipes.swiper_id=$swipee_id AND swipes.swipee_id=$swiper_id");
+      $match = \DB::select("SELECT id FROM swipes WHERE swipes.swiper_id=$request->header('swipee_id') AND swipes.swipee_id=$request->header('swiper_id')");
+Log::info("here?4");
+      $rtnObj = (object)[];
+      $rtnObj->matched = false;
 
       if ($match->count()) {
+        Log::info("here?5");
         $newMatch = new Match;
         $newMatch->user_one_id = $request->header('swiper_id');
         $newMatch->user_two_id = $request->header('swipee_id');
-        $newMatch->hackathon_id = $request->header('hackathon_id');
         $newMatch->save();
+        $rtnObj->matched = true;
+        Log::info("here?6");
       }
+
+      $myJSON = json_encode($rtnObj);
+      Log::info("here?7 $myJSON");
+      return $myJSON;
     }
 
     public function getUserIdFromToken($authToken)
@@ -75,36 +90,34 @@ class GetData extends Controller
     }
 
 
-    public function saveProfile($request)
+    public function updateProfile($request)
     {
       if ($this->invalidAuthToken($request->header('auth_token'))) return;
-
       // swiper_id, swipee_id, hackathon_id, said_yes
-      $id = getUserIdFromToken($request->header('auth_token'));
+      $id = $this->getUserIdFromToken($request->header('auth_token'));
       $updatedUser = User::find($id);
-      $updatedUser->content = $request->header('content');
+      $updatedUser->contact = $request->header('contact');
       $updatedUser->skills = $request->header('skills');
       $updatedUser->projects = $request->header('projects');
+      $updatedUser->save();
 
       $usrObj = (object)[];
       $usrObj->user = $updatedUser;
-
+      $usrObj->success = true;
       $myJSON = json_encode($usrObj);
-
       return $myJSON;
     }
 
-    public function getCards($authToken, $hackathonId) {
-      if ($this->invalidAuthToken($authToken)) return;
+    public function getCards($results) {
+      $authToken = $results->header('auth_token');
 
+      if ($this->invalidAuthToken($authToken)) return;
       $id = $this->getUserIdFromToken($authToken);
-      Log::info("$id");
-      $filteredUsrs = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
+      $filteredCards = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
       //$filteredUsrs = \DB::select("SELECT * FROM users LEFT JOIN swipes ON users.id=swipes.swipee_id WHERE users.id=$id");
       // TODO: Return error if the above query returns nothing (as in, there's no one left!)
       $usrObj = (object)[];
-      $usrObj->users = $filteredUsrs;
-
+      $usrObj->cards = $filteredCards;
       $myJSON = json_encode($usrObj);
 
       return $myJSON;
@@ -166,7 +179,7 @@ class GetData extends Controller
         return $myJSON;
     }
 
-     * Returns the matches for a given user
+     /** Returns the matches for a given user
      *
      * @return json
      */

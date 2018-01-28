@@ -19,11 +19,34 @@ class LoginScreen extends React.Component {
     };
   }
 
+
+  displayAlert(title, message) {
+    Alert.alert(
+      title,
+      message,
+      [{text: 'OK', onPress: () => console.log('OK Pressed')},],
+      { cancelable: false }
+    )
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.success) {
+      this.props.changeView('Browse')
+    }
+
+  }
+
   onPressLogin() {
     // Do the login
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
+    if (email === "") {
+      displayAlert("No Email", "Please enter your email");
+      return;
+    } else if (password === "") {
+      displayAlert("No Password", "Please enter your password");
+      return;
+    }
     let userData = {
       "email": email,
       "name": "Jacob Steves",
@@ -62,6 +85,7 @@ function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
     authToken: state.profile.authToken,
+    success: state.profile.success
   };
 }
 

@@ -5,11 +5,13 @@ import {
   TextInput,
   Button,
   View,
-  Text
+  Text,
+  Image
 } from 'react-native';
+import { updateProfile } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/LoginStyles'
 
-export default class EditProfileScreen extends React.Component {
+class EditProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,14 +22,25 @@ export default class EditProfileScreen extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.profileSuccess) {
+      console.log("success?")
+      this.props.changeView("Browse");
+    }
+  }
+
   onPressSave() {
     const {skills, github, phone, description} = this.state;
     let userData = {
+      "auth_token": this.props.authToken,
       "skills": skills,
-      "github": github,
-      "phone": phone,
-      "description": description,
+      "contact": {
+        "phone": phone,
+        "github": github,
+      },
+      "projects": description, // Description is stored in projects, don't ask why
     }
+    this.props.actions.updateProfile(userData);
   }
 
   render() {
@@ -42,24 +55,30 @@ export default class EditProfileScreen extends React.Component {
         <TextInput
           style={styles.textInput}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(skills) => this.setState({skills: skills})}/>
         <Text
           style={styles.text}>GitHub Account URL:</Text>
         <TextInput
           style={styles.textInput}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(github) => this.setState({github: github})}/>
         <Text style={styles.text}>When you match with someone, we give them your email. You can optionally include you phone number for us to give them as well.</Text>
         <TextInput
-          secureTextEntry={true}
           style={styles.textInput}
+          returnKeyType="done"
+          blurOnSubmit={true}
           underlineColorAndroid='transparent'
           onChangeText={(phone) => this.setState({phone: phone})}/>
         <Text style={styles.text}>Anything you want to tell other hackers?</Text>
         <TextInput
-          secureTextEntry={true}
           style={styles.textInput}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(description) => this.setState({description: description})}/>
         <Button
           onPress={() => this.onPressSave()}
@@ -68,10 +87,24 @@ export default class EditProfileScreen extends React.Component {
       </View>
     );
   }
-
-  render() {
-    return (
-      <View></View>
-    )
-  }
 }
+
+function mapStateToProps(state) {
+  return {
+    userData: state.profile.userData,
+    authToken: state.profile.authToken,
+    matched: state.profile.matched,
+    cards: state.profile.cards,
+    profileSuccess: state.profile.profileSuccess
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      updateProfile
+    }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileScreen);
