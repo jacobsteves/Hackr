@@ -75,7 +75,7 @@ export function getCards(userData) {
   return function(dispatch) {
     fetch(types.APP_BACKEND_URL + "/api/getCards", {
       headers: {
-        'auth_token': userData.authToken
+        'auth_token': userData.auth_token
       }
     }).then((response) => response.json())
     .then((responseJson) => {

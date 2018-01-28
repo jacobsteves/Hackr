@@ -96,7 +96,7 @@ class Authenticate extends Controller
       $sessionData = (object)[];
       $sessionData->userData = $myObj;
 
-      $sessionData->authToken = "$users->auth_token";
+      $sessionData->auth_token = "$users->auth_token";
       $sessionData->data = "$data";
       $sessionData->id = "$users->id";
       $sessionData->success = true;
@@ -111,31 +111,33 @@ class Authenticate extends Controller
       $email = $data->header('email');
       $name = $data->header('name');
       $password = Hash::make($data->header('password'));
-      $authToken = Hash::make("$email");
+      $auth_token = Hash::make("$email");
 
       $myObj = (object)[];
       $myObj->name = "$name";
       $myObj->email = "$email";
-
-      $sessionData = (object)[];
-      $sessionData->userData = $myObj;
-      $sessionData->authToken = "$authToken";
-      $sessionData->data = "$data";
 
       // Create the new user instance
       $user = new User;
       $user->name = "$name";
       $user->email = "$email";
       $user->password = "$password";
-      $user->auth_token = "$authToken";
+      $user->auth_token = "$auth_token";
       $user->contact = "";
       $user->skills = "";
       $user->projects = "";
       $user->save();
 
+      $myObj->id = "$user->id";
+
+      $sessionData = (object)[];
+      $sessionData->userData = $myObj;
+      $sessionData->auth_token = "$auth_token";
+      $sessionData->data = "$data";
+
       $sessionData->success = true;
       $myJSON = json_encode($sessionData);
-
+      Log::info("this token in signup: $auth_token");
       return "$myJSON";
     }
 }

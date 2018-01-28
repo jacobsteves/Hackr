@@ -34,7 +34,7 @@ class Browse extends React.Component {
   componentDidMount() {
     console.log("mounted!");
     let userData = {
-      'authToken': this.props.authToken
+      'auth_token': this.props.auth_token
     }
     this.props.actions.getCards(userData);
   }
@@ -51,9 +51,10 @@ class Browse extends React.Component {
 
   onPressAccept() {
     console.log('Accepted ' + this.state.swipeeId);
+    console.log('userDataID:' + this.props.userData.id);
     let pos = this.state.position;
     let json = {
-      'auth_token': this.props.authToken,
+      'auth_token': this.props.auth_token,
       'swiper_id': this.props.userData.id,
       'swipee_id': this.state.cards[pos].id,
       'hackathon_id': 0,
@@ -65,7 +66,7 @@ class Browse extends React.Component {
     });
     if (pos + 1 === this.state.cards.length) {
       let auth = {
-        "auth_token": this.props.authToken,
+        "auth_token": this.props.auth_token,
       };
       this.setState({
         position: 0
@@ -76,9 +77,9 @@ class Browse extends React.Component {
 
   onPressDeny() {
     console.log('Denied ' + this.state.swipeeId);
-    console.log(this.props.userData.id);
+    console.log('userDataID:' + this.props.userData.id);
     let json = {
-      'auth_token': this.props.authToken,
+      'auth_token': this.props.auth_token,
       'swiper_id': this.props.userData.id,
       'swipee_id': this.state.cards[this.state.position].id,
       'hackathon_id': 0,
@@ -180,7 +181,7 @@ class Browse extends React.Component {
 function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
-    authToken: state.profile.authToken,
+    auth_token: state.profile.auth_token,
     matched: state.profile.matched,
     cards: state.profile.cards
   };

@@ -40,17 +40,17 @@ class GetData extends Controller
         //
     }
 
-    private function invalidAuthToken($authToken)
+    private function invalidauth_token($auth_token)
     {
-        // return !(\DB::table('users')->get()->where('auth_token', $authToken)->exists());
-        return !(User::where('auth_token', '=', "$authToken")->exists());
+        // return !(\DB::table('users')->get()->where('auth_token', $auth_token)->exists());
+        return !(User::where('auth_token', '=', "$auth_token")->exists());
     }
 
     public function addSwipe($request)
     {
       Log::info("here?");
       Log::info($request->header('auth_token'));
-      if ($this->invalidAuthToken($request->header('auth_token'))) return;
+      if ($this->invalidauth_token($request->header('auth_token'))) return;
       Log::info("here?2");
       // swiper_id, swipee_id, hackathon_id, said_yes
       $newSwipe = new Swipe;
@@ -66,7 +66,7 @@ Log::info("here?4");
       $rtnObj = (object)[];
       $rtnObj->matched = false;
 
-      if ($match->count()) {
+      if (count($match)) {
         Log::info("here?5");
         $newMatch = new Match;
         $newMatch->user_one_id = $request->header('swiper_id');
@@ -87,11 +87,11 @@ Log::info("here?4");
       return $myJSON;
     }
 
-    public function getUserIdFromToken($authToken)
+    public function getUserIdFromToken($auth_token)
     {
-      if ($this->invalidAuthToken($authToken)) return;
+      if ($this->invalidauth_token($auth_token)) return;
 
-      $id = \DB::table('users')->get()->where('auth_token', $authToken)->first()->id;
+      $id = \DB::table('users')->get()->where('auth_token', $auth_token)->first()->id;
       return $id;
     }
 
@@ -100,7 +100,7 @@ Log::info("here?4");
     {
       Log::info("got ehre");
       Log::info($request->header('auth_token'));
-      if ($this->invalidAuthToken($request->header('auth_token'))) return;
+      if ($this->invalidauth_token($request->header('auth_token'))) return;
       // swiper_id, swipee_id, hackathon_id, said_yes
       $id = $this->getUserIdFromToken($request->header('auth_token'));
       Log::info("got ehre 2");
@@ -120,10 +120,10 @@ Log::info("here?4");
     }
 
     public function getCards($results) {
-      $authToken = $results->header('auth_token');
-      Log::info("$authToken");
-      if ($this->invalidAuthToken($authToken)) return;
-      $id = $this->getUserIdFromToken($authToken);
+      $auth_token = $results->header('auth_token');
+      Log::info("$auth_token");
+      if ($this->invalidauth_token($auth_token)) return;
+      $id = $this->getUserIdFromToken($auth_token);
       $filteredCards = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
       //$filteredUsrs = \DB::select("SELECT * FROM users LEFT JOIN swipes ON users.id=swipes.swipee_id WHERE users.id=$id");
       // TODO: Return error if the above query returns nothing (as in, there's no one left!)
@@ -142,7 +142,7 @@ Log::info("here?4");
      */
     public function getUser($id)
     {
-      if ($this->invalidAuthToken($authToken)) return;
+      if ($this->invalidauth_token($auth_token)) return;
 
       $users = \DB::table('users')->get()->where('id', 1)->first();
       $usrObj = (object)[];
@@ -197,10 +197,10 @@ Log::info("here?4");
      public function getMatches($response)
      {
        Log::info("data here");
-       $authToken = $response->header('auth_token');
+       $auth_token = $response->header('auth_token');
        $id = $response->header('user_id');
        Log::info("data here 2 $response->headers");
-       if ($this->invalidAuthToken($authToken)) return;
+       if ($this->invalidauth_token($auth_token)) return;
 Log::info("data here 3");
        $matches = \DB::select("SELECT users.name, matches.user_two_id, users.contact FROM matches JOIN users ON matches.user_two_id=users.id WHERE user_one_id = $id" );
        $matchesObj = (object)[];

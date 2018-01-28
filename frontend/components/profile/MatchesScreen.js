@@ -26,7 +26,7 @@ class MatchesScreen extends React.Component {
 
   componentWillMount() {
     let id = this.props.userData.id;
-    let auth = this.props.authToken;
+    let auth = this.props.auth_token;
     console.log(auth);
     this.props.actions.getMatches(id, auth);
   }
@@ -55,7 +55,7 @@ class MatchesScreen extends React.Component {
 function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
-    authToken: state.profile.authToken,
+    auth_token: state.profile.auth_token,
     matched: state.profile.matched,
     cards: state.profile.cards,
     profileSuccess: state.profile.profileSuccess,

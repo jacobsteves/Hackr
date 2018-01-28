@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 
 const initialState = {
   userData: "",
-  authToken: "",
+  auth_token: "",
   success: false,
   matched: false,
   profileSuccess: false,
@@ -19,7 +19,7 @@ export default function profile(state = initialState, action = {}) {
       console.log(action.data)
       return {
         ...state,
-        authToken: action.data.authToken,
+        auth_token: action.data.auth_token,
         userData: action.data.userData,
         success: action.data.success,
       }
@@ -30,7 +30,7 @@ export default function profile(state = initialState, action = {}) {
       console.log(action.data.success)
       return {
         ...state,
-        authToken: action.data.token,
+        auth_token: action.data.auth_token,
         userData: action.data.userData,
         success: action.data.success,
       }
