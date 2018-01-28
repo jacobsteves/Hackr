@@ -72,6 +72,25 @@ class GetData extends Controller
     }
 
     /**
+     * Returns the users associated with hackathon. returns cards that match the
+     * hackathon being browsed which the user has not swiped on
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return json
+     */
+    public function getSwipees($request)
+    {
+        // get data from header
+        $user_id = $request->header('user_id');
+        $hackathon_id = $request->header('hackathon_id');
+
+        $cards = \DB::select("SELECT * FROM cards INNER JOIN swipes ON swipes.swiper_id != $user_id WHERE cards.user_id != $user_id AND cards.hackathon_id = $hackathon_id");
+        $myJSON = json_encode($cards);
+
+        return $myJSON;
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
