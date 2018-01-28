@@ -52,7 +52,8 @@ export function addSwipe(swipeData) {
       headers: {
         'swiper_id': userData.swiper_id,
         'swipee_id': userData.swipee_id,
-        'hackathon_id': userData.hackathon_id
+        'hackathon_id': userData.hackathon_id,
+        'said_yes': userData.said_yes
       }
     }).then((response) => response.json())
     .then((responseJson) => {

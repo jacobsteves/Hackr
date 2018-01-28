@@ -53,7 +53,6 @@ class GetData extends Controller
       $newSwipe = new Swipe;
       $newSwipe->swiper_id = $request->header('swiper_id');
       $newSwipe->swipee_id = $request->header('swipee_id');
-      $newSwipe->hackathon_id = $request->header('hackathon_id');
       $newSwipe->said_yes = $request->header('said_yes');
       $newSwipe->save();
 
@@ -66,7 +65,6 @@ class GetData extends Controller
         $newMatch = new Match;
         $newMatch->user_one_id = $request->header('swiper_id');
         $newMatch->user_two_id = $request->header('swipee_id');
-        $newMatch->hackathon_id = $request->header('hackathon_id');
         $newMatch->save();
         $rtnObj->matched = true;
       }
