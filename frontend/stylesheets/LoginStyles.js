@@ -20,7 +20,7 @@ export default StyleSheet.create({
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
  email: {
    margin: 5,
