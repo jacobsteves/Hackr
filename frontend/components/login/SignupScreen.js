@@ -106,7 +106,7 @@ class SignupScreen extends React.Component {
         <Button
           onPress={() => this.onPressSetup()}
           title='Setup Account'
-          style={styles.loginButton}> </Button>
+          style={styles.loginButton}/>
       </View>
     );
   }
