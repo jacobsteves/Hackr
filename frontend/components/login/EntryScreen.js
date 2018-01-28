@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
-  TextInput,
+  Image,
   Button,
   View,
   Text
@@ -25,14 +25,18 @@ export default class EntryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <Image
+        style={styles.mainLogo}
+        source={require('../../assets/main-logo.png')}
+        resizeMode='contain'/>
       <Button
-        onPress={() => this.onPressSignup()}
+        onPress={() => this.props.changeView('SignupScreen')}
         title='Signup'
-        style={styles.loginButton}> </Button>
+        style={styles.bottomButton}/>
         <Button
-          onPress={() => this.onPressLogin()}
+          onPress={() => this.props.changeView('LoginScreen')}
           title='Login'
-          style={styles.loginButton}> </Button>
+          style={styles.bottomButton}/>
       </View>
     );
   }

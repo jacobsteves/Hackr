@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GetCards extends Controller
+class GetData extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,19 +38,35 @@ class GetCards extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Returns the formatted user object
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return json
      */
-    public function show($id)
+    public function getCards($id)
     {
         $users = \DB::table('users')->get()->where('id', 1)->first();
-        $myObj = (object)[];
-        $myObj->name = $users->name;
-        $myObj->email = $users->email;
+        $usrObj = (object)[];
+        $usrObj->name = $users->name;
+        $usrObj->email = $users->email;
 
-        $myJSON = json_encode($myObj);
+        $myJSON = json_encode($usrObj);
+
+        return $myJSON;
+    }
+
+    /**
+     * Returns the formatted hackathons
+     *
+     * @return json
+     */
+    public function getHackathons()
+    {
+        $hackathons = \DB::table('hackathons')->get();
+        $hackObj = (object)[];
+        $hackObj->hackathons = $hackathons->toArray();
+
+        $myJSON = json_encode($hackObj);
 
         return $myJSON;
     }
