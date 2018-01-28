@@ -91,12 +91,14 @@ class Authenticate extends Controller
       $myObj = (object)[];
       $myObj->name = $users->name;
       $myObj->email = $users->email;
+      $myObj->id = "$users->id";
 
       $sessionData = (object)[];
       $sessionData->userData = $myObj;
 
       $sessionData->authToken = "$users->auth_token";
       $sessionData->data = "$data";
+      $sessionData->id = "$users->id";
       $sessionData->success = true;
 
       $myJSON = json_encode($sessionData);
