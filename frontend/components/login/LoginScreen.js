@@ -23,16 +23,6 @@ export default class LoginScreen extends React.Component {
     // Hash stuff,
   }
 
-  onUpdateEmail(email) {
-    console.log(email);
-
-  }
-
-  onUpdatePassword(password) {
-    console.log(password);
-
-  }
-
   render() {
     return (
       <View style={styles.container}>

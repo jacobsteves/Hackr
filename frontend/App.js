@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './components/login/LoginScreen';
+import EntryScreen from './components/login/EntryScreen';
 
 export default class App extends React.Component {
   render() {
-    return <LoginScreen/>
+    return <EntryScreen/>
     // return (
     //   <View style={styles.container}>
     //     <Text>Open up App.js to start working on your app!</Text>
