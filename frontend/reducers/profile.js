@@ -52,7 +52,7 @@ export default function profile(state = initialState, action = {}) {
     case types.GET_MATCHES:
       return {
         ...state,
-        matches: action.data.matches
+        matches: action.data
       }
     default:
     console.log("default")

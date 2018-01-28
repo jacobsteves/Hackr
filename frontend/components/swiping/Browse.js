@@ -162,7 +162,12 @@ class Browse extends React.Component {
                   style={styles.header}>
                   GitHub</Text>
               <Text
-                style={styles.bio}>{this.state.cards[this.state.position].contact.github || ""}</Text>
+                style={styles.bio}>{this.state.cards[this.state.position].contact.github}</Text>
+                <Button
+                    onPress={() => this.props.changeView("MatchesScreen")}
+                    title="Go to matches"
+                >
+                </Button>
             </ScrollView>
 
             <View style={[styles.inline]}>

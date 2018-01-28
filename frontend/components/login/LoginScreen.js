@@ -30,7 +30,7 @@ class LoginScreen extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.success) {
-      this.props.changeView('MatchesScreen')
+      this.props.changeView('Browse')
     }
 
   }
@@ -49,7 +49,6 @@ class LoginScreen extends React.Component {
     }
     let userData = {
       "email": email,
-      "name": "Jacob Steves",
       "password": password
     }
     this.props.actions.login(userData);
