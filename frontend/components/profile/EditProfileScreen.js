@@ -13,4 +13,10 @@ export default class EditProfileScreen extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  render() {
+    return (
+      <View></View>
+    )
+  }
 }

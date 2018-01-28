@@ -24,6 +24,15 @@ class SignupScreen extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    console.log(nextProps.success);
+    if (nextProps.success) {
+      console.log("success");
+      this.props.changeView('EditProfileScreen')
+    }
+  }
+
   displayAlert(title, message) {
     Alert.alert(
       title,
@@ -34,23 +43,24 @@ class SignupScreen extends React.Component {
   }
 
   onPressSetup() {
-    if (this.state.name === "") {
+    const {name, email, password, confirmPassword, university} = this.state;
+    if (name === "") {
       this.displayAlert('Missing Field', 'Please enter your name')
       return;
-    } else if (this.state.email === "") {
+    } else if (email === "") {
       this.displayAlert('Missing Field', 'Please enter your email address')
       return;
-    } else if (this.state.password === "") {
+    } else if (password === "") {
       this.displayAlert('Missing Field', 'Please enter a password')
       return;
-    } else if (this.state.confirmPassword === "") {
+    } else if (confirmPassword === "") {
       this.displayAlert('Missing Field', 'Please confirm your password')
       return;
-    } else if (this.state.university === "") {
+    } else if (university === "") {
       this.displayAlert('Missing Field', 'Please enter your university')
       return;
     }
-    if (this.state.password !== this.state.confirmPassword) {
+    if (password !== confirmPassword) {
       this.displayAlert('Password mismatch', 'Your passwords do not match each other')
       return;
     }
@@ -59,10 +69,9 @@ class SignupScreen extends React.Component {
       "email": email,
       "name": name,
       "password": password,
-      "universty": universty,
+      "universty": university,
     }
     this.props.actions.signup(userData);
-
   }
 
   render() {
@@ -78,30 +87,40 @@ class SignupScreen extends React.Component {
         <TextInput
           style={styles.textInput}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(name) => this.setState({name: name})}/>
         <Text
           style={styles.text}>Email Address:</Text>
         <TextInput
           style={styles.email}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(email) => this.setState({email: email})}/>
         <Text style={styles.text}>Password:</Text>
         <TextInput
           secureTextEntry={true}
           style={styles.password}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(password) => this.setState({password: password})}/>
         <Text style={styles.text}>Confirm Password:</Text>
         <TextInput
           secureTextEntry={true}
           style={styles.password}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(password) => this.setState({confirmPassword: password})}/>
         <Text
           style={styles.text}>University:</Text>
         <TextInput
           style={styles.textInput}
           underlineColorAndroid='transparent'
+          returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={(university) => this.setState({university: university})}/>
         <Button
           onPress={() => this.onPressSetup()}
@@ -116,6 +135,7 @@ function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
     authToken: state.profile.authToken,
+    success: state.profile.success,
   };
 }
 
