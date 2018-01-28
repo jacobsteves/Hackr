@@ -89,18 +89,34 @@ class Authenticate extends Controller
       $myObj->name = $users->name;
       $myObj->email = $users->email;
 
-      $userData = (object)[];
-      $userData->userData = $myObj;
-      $userData->authToken = "";
-      $userData->data = "$data";
+      $sessionData = (object)[];
+      $sessionData->userData = $myObj;
+      $sessionData->authToken = "$users->auth_token";
+      $sessionData->data = "$data";
 
-      $myJSON = json_encode($userData);
+      $myJSON = json_encode($sessionData);
 
       return "$myJSON";
     }
 
     public function signup($data)
     {
-      return "$data";
+      $email = $data->email;
+      $name = $data->name;
+      $password = Hash::make($password);
+      $authToken = Hash::make($email);
+
+      $myObj = (object)[];
+      $myObj->name = $users->name;
+      $myObj->email = $users->email;
+
+      $sessionData = (object)[];
+      $sessionData->userData = $myObj;
+      $sessionData->authToken = "$auth_token";
+      $sessionData->data = "$data";
+
+      $myJSON = json_encode($sessionData);
+
+      return "$myJSON";
     }
 }
