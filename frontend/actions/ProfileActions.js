@@ -92,3 +92,23 @@ export function saveProfileData(profileData) {
     })
   };
 }
+
+export function getCards(userData) {
+  return function(dispatch) {
+    fetch(types.APP_BACKEND_URL + "/api/getCards", {
+      headers: {
+        'auth_token': userData.authToken
+      }
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      dispatch({
+        type: types.GET_CARDS,
+        data: responseJson
+      });
+    })
+    .catch((error) => {
+      console.error('error ' + error);
+    })
+  };
+}

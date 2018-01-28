@@ -37,6 +37,11 @@ export default function profile(state = initialState, action = {}) {
         ...state,
         matched: action.data.matched,
       }
+    case types.GET_CARDS:
+      return {
+        ...state,
+        cards: action.data.cards
+      }
     default:
     console.log("default")
       return state;

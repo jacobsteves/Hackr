@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Log;
+use App\User;
 
 class GetData extends Controller
 {
@@ -40,7 +41,8 @@ class GetData extends Controller
 
     private function invalidAuthToken($authToken)
     {
-        return !(\DB::table('users')->get()->where('auth_token', $authToken)->first());
+        // return !(\DB::table('users')->get()->where('auth_token', $authToken)->exists());
+        return !(User::where('auth_token', '=', "$authToken")->exists());
     }
 
     public function addSwipe($request)
@@ -102,17 +104,20 @@ class GetData extends Controller
       return $myJSON;
     }
 
-    public function getCards($authToken, $hackathonId) {
-      if ($this->invalidAuthToken($authToken)) return;
+    public function getCards($results) {
+      $authToken = $results->header('auth_token');
 
+      Log::info("calling $authToken");
+      if ($this->invalidAuthToken($authToken)) return;
+      Log::info("got here");
       $id = $this->getUserIdFromToken($authToken);
       Log::info("$id");
-      $filteredUsrs = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
+      $filteredCards = \DB::select("SELECT * FROM users WHERE users.id<>$id AND users.id NOT IN (SELECT swipee_id FROM swipes WHERE swipes.swiper_id=$id) LIMIT 30");
       //$filteredUsrs = \DB::select("SELECT * FROM users LEFT JOIN swipes ON users.id=swipes.swipee_id WHERE users.id=$id");
       // TODO: Return error if the above query returns nothing (as in, there's no one left!)
       $usrObj = (object)[];
-      $usrObj->users = $filteredUsrs;
-
+      $usrObj->cards = $filteredCards;
+      // Log::info("$usrObj");
       $myJSON = json_encode($usrObj);
 
       return $myJSON;
@@ -174,7 +179,7 @@ class GetData extends Controller
         return $myJSON;
     }
 
-     * Returns the matches for a given user
+     /** Returns the matches for a given user
      *
      * @return json
      */
