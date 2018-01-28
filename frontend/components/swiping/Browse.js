@@ -38,7 +38,7 @@ class Browse extends React.Component {
     }
     this.props.actions.getCards(userData);
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.matched) {
       this.setState({ modalVisible: true });
@@ -53,20 +53,21 @@ class Browse extends React.Component {
     console.log('Accepted ' + this.state.swipeeId);
     let pos = this.state.position;
     let json = {
+      'auth_token': this.props.authToken,
       'swiper_id': this.props.userData.id,
       'swipee_id': this.state.cards[pos].id,
       'hackathon_id': 0,
-      'said_yes': true,
+      'said_yes': 1,
     }
-    this.props.action.addSwipe(json);
-    setState({
+    this.props.actions.addSwipe(json);
+    this.setState({
       position: pos + 1
     });
     if (pos + 1 === this.state.cards.length) {
       let auth = {
         "auth_token": this.props.authToken,
       };
-      setState({
+      this.setState({
         position: 0
       });
       this.props.actions.getCards(auth);
@@ -75,14 +76,16 @@ class Browse extends React.Component {
 
   onPressDeny() {
     console.log('Denied ' + this.state.swipeeId);
+    console.log(this.props.userData.id);
     let json = {
+      'auth_token': this.props.authToken,
       'swiper_id': this.props.userData.id,
       'swipee_id': this.state.cards[this.state.position].id,
       'hackathon_id': 0,
-      'said_yes': false,
+      'said_yes': 0,
     }
-    this.props.action.addSwipe(json);
-    setState({
+    this.props.actions.addSwipe(json);
+    this.setState({
       position: this.state.position++
     });
 

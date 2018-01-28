@@ -30,7 +30,7 @@ class LoginScreen extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.success) {
-      this.props.changeView('EditProfileScreen')
+      this.props.changeView('Browse')
     }
 
   }

@@ -50,10 +50,11 @@ export function addSwipe(swipeData) {
   return function(dispatch) {
     fetch(types.APP_BACKEND_URL + "/api/addSwipe", {
       headers: {
-        'swiper_id': userData.swiper_id,
-        'swipee_id': userData.swipee_id,
-        'hackathon_id': userData.hackathon_id,
-        'said_yes': userData.said_yes
+        'auth_token': swipeData.auth_token,
+        'swiper_id': swipeData.swiper_id,
+        'swipee_id': swipeData.swipee_id,
+        'hackathon_id': swipeData.hackathon_id,
+        'said_yes': swipeData.said_yes
       }
     }).then((response) => response.json())
     .then((responseJson) => {
