@@ -5,8 +5,12 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import * as reducers from './reducers';
 
+<<<<<<< Updated upstream
 import LoginScreen from './components/login/LoginScreen';
 import EntryScreen from './components/login/EntryScreen';
+=======
+import LoginScreen from './components/login/SignupScreen';
+>>>>>>> Stashed changes
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk)(createStore));
 const reducer = combineReducers(reducers);

@@ -12,6 +12,13 @@ import styles from '../../stylesheets/LoginStyles'
 export default class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: "",
+      emailAddress: "",
+      password: "",
+      confirmPassword: "",
+      university: "",
+    };
   }
 
   onPressSetup() {
@@ -36,6 +43,16 @@ export default class SignupScreen extends React.Component {
           secureTextEntry={true}
           style={styles.password}
           onEndEditing={(password) => this.setState({password: password})}/>
+        <Text style={styles.text}>Confirm Password:</Text>
+        <TextInput
+          secureTextEntry={true}
+          style={styles.password}
+          onEndEditing={(password) => this.setState({confirmPassword: password})}/>
+        <Text
+          style={styles.text}>University:</Text>
+        <TextInput
+          style={styles.textInput}
+          onEndEditing={(name) => this.setState({university: university})}/>
         <Button
           onPress={() => this.onPressSetup()}
           title='Setup Account'
