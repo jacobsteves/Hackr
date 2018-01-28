@@ -9,6 +9,7 @@ import LoginScreen from './components/login/LoginScreen';
 import EntryScreen from './components/login/EntryScreen';
 import SignupScreen from './components/login/SignupScreen';
 import EditProfileScreen from './components/profile/EditProfileScreen';
+import MatchesScreen from './components/profile/MatchesScreen';
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk)(createStore));
 const reducer = combineReducers(reducers);
@@ -18,7 +19,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "EntryScreen",
+      currentView: "MatchesScreen",
     };
   }
 
@@ -45,6 +46,9 @@ export default class App extends React.Component {
           }
           {(currentView == "LoginScreen") &&
             <LoginScreen changeView={(view) => this.changeView(view)} />
+          }
+          {(currentView == "MatchesScreen") &&
+            <MatchesScreen changeView={(view) => this.changeView(view)} />
           }
         </View>
       </Provider>
