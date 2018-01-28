@@ -9,13 +9,18 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: 30,
   },
+  mainLogo: {
+    width: screenWidth,
+    flex:2,
+
+  },
   textInput: {
    margin: 5,
    width: screenWidth,
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
  email: {
    margin: 5,
@@ -23,7 +28,7 @@ export default StyleSheet.create({
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
  password: {
    margin: 5,
@@ -31,8 +36,17 @@ export default StyleSheet.create({
    borderRadius: 4,
    borderWidth: 0.5,
    borderColor: '#d6d7da',
-   textAlign: 'center',
+   textAlign: 'left',
  },
+ bottomButton: {
+    flex: 1,
+    width: screenWidth,
+    height: 75,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: '#aaaaaa',
+  },
  button: {
     width: screenWidth,
     height: 50,

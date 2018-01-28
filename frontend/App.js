@@ -6,6 +6,8 @@ import thunk from 'redux-thunk';
 import * as reducers from './reducers';
 
 import LoginScreen from './components/login/LoginScreen';
+import EntryScreen from './components/login/EntryScreen';
+import SignupScreen from './components/login/SignupScreen';
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk)(createStore));
 const reducer = combineReducers(reducers);
@@ -15,9 +17,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <LoginScreen/>
+        <SignupScreen/>
       </Provider>
-    )
+    );
     // return (
     //   <View style={styles.container}>
     //     <Text>Open up App.js to start working on your app!</Text>

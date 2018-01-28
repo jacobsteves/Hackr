@@ -29,18 +29,8 @@ class LoginScreen extends React.Component {
       "name": "Jacob Steves",
       "password": password
     }
-    this.props.actions.signup(userData);
+    this.props.actions.login(userData);
     // Hash stuff,
-  }
-
-  onUpdateEmail(email) {
-    console.log(email);
-
-  }
-
-  onUpdatePassword(password) {
-    console.log(password);
-
   }
 
   render() {
@@ -51,11 +41,13 @@ class LoginScreen extends React.Component {
           style={styles.text}>Email Address:</Text>
         <TextInput
           style={styles.email}
+          underlineColorAndroid='transparent'
           onChangeText={(email) => this.setState({email: email})}/>
         <Text style={styles.text}>Password:</Text>
         <TextInput
           secureTextEntry={true}
           style={styles.password}
+          underlineColorAndroid='transparent'
           onChangeText={(password) => this.setState({password: password})}/>
         <Button
           onPress={() => this.onPressLogin()}
