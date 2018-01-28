@@ -7,12 +7,16 @@ import {
   View,
   Text
 } from 'react-native';
+import { login } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/LoginStyles'
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      email: "",
+      password: "",
+    };
   }
 
   onPressLogin() {
@@ -20,6 +24,7 @@ export default class LoginScreen extends React.Component {
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
+    this.props.actions.login();
     // Hash stuff,
   }
 
@@ -55,3 +60,20 @@ export default class LoginScreen extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    userData: state.profile.userData,
+    authToken: state.profile.authToken,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      login
+    }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

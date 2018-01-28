@@ -84,7 +84,18 @@ class Authenticate extends Controller
 
     public function login($data)
     {
-      return "$data";
+      $users = \DB::table('users')->get()->where('id', 1)->first();
+      $myObj = (object)[];
+      $myObj->name = $users->name;
+      $myObj->email = $users->email;
+
+      $userData = (object)[];
+      $userData->userData = $myObj;
+      $userData->authToken = "";
+
+      $myJSON = json_encode($userData);
+
+      return "$myJSON";
     }
 
     public function signup($data)
