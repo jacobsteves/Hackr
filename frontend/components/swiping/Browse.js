@@ -26,6 +26,7 @@ class Browse extends React.Component {
       moreInfo: "",
       skills: "",
       github: "",
+      position: 0,
       cards: []
     };
   }
@@ -49,10 +50,41 @@ class Browse extends React.Component {
 
   onPressAccept() {
     console.log('Accepted ' + this.state.swipeeId);
+    let pos = this.state.position;
+    let json = {
+      'swiper_id': this.props.userData.id,
+      'swipee_id': this.state.cards[pos].id,
+      'hackathon_id': 0,
+      'said_yes': true,
+    }
+    this.props.action.addSwipe(json);
+    setState({
+      position: pos + 1
+    });
+    if (pos + 1 === this.state.cards.length) {
+      let auth = {
+        "auth_token": this.props.authToken,
+      };
+      setState({
+        position: 0
+      });
+      this.props.actions.getCards(auth);
+    }
   }
 
   onPressDeny() {
     console.log('Denied ' + this.state.swipeeId);
+    let json = {
+      'swiper_id': this.props.userData.id,
+      'swipee_id': this.state.cards[this.state.position].id,
+      'hackathon_id': 0,
+      'said_yes': false,
+    }
+    this.props.action.addSwipe(json);
+    setState({
+      position: this.state.position++
+    });
+
   }
 
   closeModal() {
@@ -88,50 +120,53 @@ class Browse extends React.Component {
           <Picker.Item label="DeltaHacks IV" value="09" />
           <Picker.Item label="Hack the North" value="1000000" />
         </Picker>
-
-        <View style={styles.line}/>
-        <Text
-          style={[styles.name, styles.centerText]}
-          numberOfLines={2}
-          minimumFontScale={0.01}>{this.state.name}</Text>
-          <View style={styles.line}/>
-        <ScrollView>
+        {this.state.cards.length > 0 &&
+          <View>
+            <View style={styles.line}/>
             <Text
-              style={styles.header}>
-              More Info</Text>
-          <Text
-            style={styles.bio}>{this.state.moreInfo}</Text>
+              style={[styles.name, styles.centerText]}
+              numberOfLines={2}
+              minimumFontScale={0.01}>{this.state.cards[this.state.position].name}</Text>
+              <View style={styles.line}/>
+            <ScrollView>
+                <Text
+                  style={styles.header}>
+                  More Info</Text>
+              <Text
+                style={styles.bio}>{this.state.cards[this.state.position].projects}</Text>
 
-          <Text
-              style={styles.header}>
-              Skills</Text>
-          <Text
-            style={styles.bio}>{this.state.skills}</Text>
+              <Text
+                  style={styles.header}>
+                  Skills</Text>
+              <Text
+                style={styles.bio}>{this.state.cards[this.state.position].skills}</Text>
 
-          <Text
-              style={styles.header}>
-              GitHub</Text>
-          <Text
-            style={styles.bio}>{this.state.github}</Text>
-        </ScrollView>
+              <Text
+                  style={styles.header}>
+                  GitHub</Text>
+              <Text
+                style={styles.bio}>{this.state.cards[this.state.position].contact.github}</Text>
+            </ScrollView>
 
-        <View style={[styles.inline]}>
-            <TouchableHighlight
-              onPress = {() => this.onPressDeny()}
-              style={[styles.highlight]}>
-              <Image
-                resizeMode='contain'
-                style={[]}
-                source={require('../../images/cross.png')}/>
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress = {() => this.onPressAccept()}
-              style={[styles.highlight]}>
-              <Image
-                resizeMode='contain'
-                style={[]}
-                source={require('../../images/checkmark.png')}/>
-            </TouchableHighlight>
+            <View style={[styles.inline]}>
+                <TouchableHighlight
+                  onPress = {() => this.onPressDeny()}
+                  style={[styles.highlight]}>
+                  <Image
+                    resizeMode='contain'
+                    style={[]}
+                    source={require('../../images/cross.png')}/>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  onPress = {() => this.onPressAccept()}
+                  style={[styles.highlight]}>
+                  <Image
+                    resizeMode='contain'
+                    style={[]}
+                    source={require('../../images/checkmark.png')}/>
+                </TouchableHighlight>
+            </View>
+          }
         </View>
       </View>
     );

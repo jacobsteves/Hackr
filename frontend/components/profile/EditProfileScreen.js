@@ -26,7 +26,7 @@ export default class EditProfileScreen extends React.Component {
       "skills": skills,
       "github": github,
       "phone": phone,
-      "description": description,
+      "projects": description, // Description is stored in projects, don't ask why
     }
   }
 
