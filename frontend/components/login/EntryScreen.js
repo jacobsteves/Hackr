@@ -30,11 +30,11 @@ export default class EntryScreen extends React.Component {
         source={require('../../assets/main-logo.png')}
         resizeMode='contain'/>
       <Button
-        onPress={() => this.onPressSignup()}
+        onPress={() => this.props.changeView('SignupScreen')}
         title='Signup'
         style={styles.bottomButton}/>
         <Button
-          onPress={() => this.onPressLogin()}
+          onPress={() => this.props.changeView('LoginScreen')}
           title='Login'
           style={styles.bottomButton}/>
       </View>
