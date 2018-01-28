@@ -20,9 +20,8 @@
   },
   "dependencies": {
     "expo": "^19.0.0",
-    "jquery": "^3.3.1",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.1",
     "redux-thunk": "^2.2.0"
-  },
+  }
 }
