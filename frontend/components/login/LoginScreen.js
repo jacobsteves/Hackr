@@ -7,7 +7,7 @@ import {
   View,
   Text
 } from 'react-native';
-import { login } from '../../actions/ProfileActions'
+import { login, signup } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/LoginStyles'
 
 class LoginScreen extends React.Component {
@@ -24,7 +24,12 @@ class LoginScreen extends React.Component {
     const { email, password } = this.state;
     console.log(email);
     console.log(password);
-    this.props.actions.login();
+    let userData = {
+      "email": email,
+      "name": "Jacob Steves",
+      "password": password
+    }
+    this.props.actions.signup(userData);
     // Hash stuff,
   }
 
@@ -63,7 +68,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
-      login
+      login,
+      signup
     }, dispatch)
   };
 }

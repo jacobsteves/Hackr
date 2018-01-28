@@ -12,6 +12,7 @@ export default function profile(state = initialState, action = {}) {
   switch (action.type) {
     case types.LOGIN:
       // simply update the warning
+      console.log(action.data)
       return {
         ...state,
         authToken: action.authToken,
