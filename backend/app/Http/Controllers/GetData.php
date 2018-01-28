@@ -84,7 +84,7 @@ class GetData extends Controller
         $user_id = $request->header('user_id');
         $hackathon_id = $request->header('hackathon_id');
 
-        $cards = \DB::select("SELECT * FROM cards INNER JOIN swipes ON swipes.swiper_id != $user_id WHERE cards.user_id != $user_id AND cards.hackathon_id = $hackathon_id");
+        $cards = \DB::select("SELECT * FROM cards INNER JOIN swipes ON swipes.swiper_id <> $user_id WHERE cards.user_id <> $user_id AND cards.hackathon_id = $hackathon_id");
         $myJSON = json_encode($cards);
 
         return $myJSON;
