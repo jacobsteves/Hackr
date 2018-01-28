@@ -1,10 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import thunk from 'redux-thunk';
+import * as reducers from './reducers';
+
 import LoginScreen from './components/login/LoginScreen';
+
+const createStoreWithMiddleware = compose(applyMiddleware(thunk)(createStore));
+const reducer = combineReducers(reducers);
+const store = createStoreWithMiddleware(reducer);
 
 export default class App extends React.Component {
   render() {
-    return <LoginScreen/>
+    return (
+      <Provider store={store}>
+        <LoginScreen/>
+      </Provider>
+    )
     // return (
     //   <View style={styles.container}>
     //     <Text>Open up App.js to start working on your app!</Text>

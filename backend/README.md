@@ -7,6 +7,8 @@ Built with PHP and Laravel
 ```
 curl -s http://php-osx.liip.ch/install.sh | bash -s 7.1
 ```
+- Download [Ngrok](https://ngrok.com/3)
+
 ## Installing Laravel
 - Install composer. Run:
 ```
@@ -42,7 +44,7 @@ to install all the dependancies
 
 - copy `.env.example` to `.env`
      - Note: `.env` is specific to each project, never commit this file
-     
+
 ## Starting the Server
 - You must generate an application encryption key. Do so by running this command:
 ```
@@ -52,5 +54,11 @@ php artisan key:generate
 ```
 php artisan serve
 ```
+
+- If you are planning on running the frontend simultaneously, run:
+```
+ngrok http 8000
+```
+and update APP_BACKEND_URL in `/frontend/actions/ActionTypes.js` to be the url given by Ngrok
 
 - In the expo app, scan the QR Code and start coding!

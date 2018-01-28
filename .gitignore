@@ -24,3 +24,5 @@ backend/Homestead.json
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 backend/.rocketeer/
+
+backend/.ngrok
