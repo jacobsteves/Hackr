@@ -38,7 +38,10 @@ class MatchesScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+        <Button
+          onPress={() => this.props.changeView("Browse")}
+          title="Go back to browse" />
+          
         <Text style={styles.header}>My matches</Text>
         <View style={styles.line}/>
         {this.props.matches && this.props.matches.map((value, key) => (
