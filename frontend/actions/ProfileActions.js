@@ -71,35 +71,11 @@ export function addSwipe(swipeData) {
   };
 }
 
-export function saveProfileData(profileData) {
-  return function(dispatch) {
-    fetch(types.APP_BACKEND_URL + "/api/saveProfile", {
-      headers: {
-        'auth_token': userData.authToken,
-        'contact': userData.contact,
-        'skills': userData.skills,
-        'projects': userData.projects
-      }
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson)
-      dispatch({
-        type: types.ADD_SWIPE,
-        data: responseJson
-      });
-    })
-    .catch((error) => {
-      console.error('error ' + error);
-      return { 'success': false };
-    })
-  };
-}
-
 export function getCards(userData) {
   return function(dispatch) {
     fetch(types.APP_BACKEND_URL + "/api/getCards", {
       headers: {
-        'auth_token': userData.authToken
+        'auth_token': userData.auth_token
       }
     }).then((response) => response.json())
     .then((responseJson) => {

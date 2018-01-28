@@ -30,7 +30,7 @@ class LoginScreen extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.success) {
-      this.props.changeView('Browse')
+      this.props.changeView('MatchesScreen')
     }
 
   }
@@ -84,7 +84,7 @@ class LoginScreen extends React.Component {
 function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
-    authToken: state.profile.authToken,
+    auth_token: state.profile.auth_token,
     success: state.profile.success
   };
 }

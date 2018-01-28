@@ -32,7 +32,7 @@ class EditProfileScreen extends React.Component {
   onPressSave() {
     const {skills, github, phone, description} = this.state;
     let userData = {
-      "auth_token": this.props.authToken,
+      "auth_token": this.props.auth_token,
       "skills": skills,
       "contact": {
         "phone": phone,
@@ -92,7 +92,7 @@ class EditProfileScreen extends React.Component {
 function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
-    authToken: state.profile.authToken,
+    auth_token: state.profile.auth_token,
     matched: state.profile.matched,
     cards: state.profile.cards,
     profileSuccess: state.profile.profileSuccess

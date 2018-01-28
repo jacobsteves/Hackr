@@ -9,6 +9,7 @@ import LoginScreen from './components/login/LoginScreen';
 import EntryScreen from './components/login/EntryScreen';
 import SignupScreen from './components/login/SignupScreen';
 import EditProfileScreen from './components/profile/EditProfileScreen';
+import MatchesScreen from './components/profile/MatchesScreen';
 import Browse from './components/swiping/Browse';
 
 const createStoreWithMiddleware = compose(applyMiddleware(thunk)(createStore));
@@ -47,6 +48,11 @@ export default class App extends React.Component {
           {(currentView == "LoginScreen") &&
             <LoginScreen changeView={(view) => this.changeView(view)} />
           }
+
+          {(currentView == "MatchesScreen") &&
+            <MatchesScreen changeView={(view) => this.changeView(view)} />
+          }
+
           {(currentView == "Browse") &&
             <Browse changeView={(view) => this.changeView(view)} />
           }

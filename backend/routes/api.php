@@ -40,3 +40,7 @@ Route::get('/addSwipe', function (Request $request) {
 Route::get('/updateProfile', function (Request $request) {
     return App::make('App\Http\Controllers\GetData')->updateProfile($request);
 });
+
+Route::get('/getMatches', function (Request $request) {
+    return App::make('App\Http\Controllers\GetData')->getMatches($request);
+});

@@ -4,10 +4,11 @@ import { AsyncStorage } from 'react-native';
 
 const initialState = {
   userData: "",
-  authToken: "",
+  auth_token: "",
   success: false,
   matched: false,
-  profileSuccess: false
+  profileSuccess: false,
+  matches: []
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -18,7 +19,7 @@ export default function profile(state = initialState, action = {}) {
       console.log(action.data)
       return {
         ...state,
-        authToken: action.data.authToken,
+        auth_token: action.data.auth_token,
         userData: action.data.userData,
         success: action.data.success,
       }
@@ -29,7 +30,7 @@ export default function profile(state = initialState, action = {}) {
       console.log(action.data.success)
       return {
         ...state,
-        authToken: action.data.token,
+        auth_token: action.data.auth_token,
         userData: action.data.userData,
         success: action.data.success,
       }
@@ -47,6 +48,11 @@ export default function profile(state = initialState, action = {}) {
       return {
         ...state,
         profileSuccess: action.data.success
+      }
+    case types.GET_MATCHES:
+      return {
+        ...state,
+        matches: action.data.matches
       }
     default:
     console.log("default")
