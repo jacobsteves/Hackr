@@ -19,6 +19,7 @@ class LoginScreen extends React.Component {
     };
   }
 
+
   displayAlert(title, message) {
     Alert.alert(
       title,
@@ -26,6 +27,12 @@ class LoginScreen extends React.Component {
       [{text: 'OK', onPress: () => console.log('OK Pressed')},],
       { cancelable: false }
     )
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.success) {
+      this.props.changeView('Browse')
+    }
+
   }
 
   onPressLogin() {
@@ -78,6 +85,7 @@ function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
     authToken: state.profile.authToken,
+    success: state.profile.success
   };
 }
 

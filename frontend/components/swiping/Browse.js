@@ -10,20 +10,32 @@ import {
   Image,
   TouchableHighlight,
   ScrollView,
+  Modal,
 } from 'react-native';
+import { addSwipe } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/BrowseStyles';
 
-export default class Browse extends React.Component {
+class Browse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hackathonId : "0",
       swipeeId: "0",
+      modalVisible: false,
       name: "",
       moreInfo: "",
       skills: "",
       github: "",
     };
+  }
+
+  componentDidMount() {
+    console.log("mounted!");
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.matched) {
+      this.setState({ modalVisible: true });
+    }
   }
 
   onPressAccept() {
@@ -34,9 +46,34 @@ export default class Browse extends React.Component {
     console.log('Denied ' + this.state.swipeeId);
   }
 
+  closeModal() {
+    this.setState({ modalVisible: false })
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Modal
+          visible={this.state.modalVisible}
+          animationType={'slide'}
+          onRequestClose={() => this.closeModal()}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.innerContainer}>
+                <Text>This is content inside of modal component</Text>
+                <Button
+                    onPress={() => this.closeModal()}
+                    title="Close modal"
+                >
+                </Button>
+                <Button
+                    onPress={() => this.props.changeView("MatchesScreen")}
+                    title="Go to matches"
+                >
+                </Button>
+              </View>
+            </View>
+        </Modal>
         <Picker selectedValue={this.state.hackathonId}
           onValueChange={(itemValue, itemIndex) => this.setState({hackathonId: itemValue})}>
           <Picker.Item label="DeltaHacks IV" value="09" />
@@ -91,3 +128,21 @@ export default class Browse extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    userData: state.profile.userData,
+    authToken: state.profile.authToken,
+    matched: state.profile.matched
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      addSwipe
+    }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Browse);

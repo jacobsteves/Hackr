@@ -57,13 +57,21 @@ class GetData extends Controller
 
       $match = \DB::select("SELECT id FROM swipes WHERE swipes.swiper_id=$swipee_id AND swipes.swipee_id=$swiper_id");
 
+      $rtnObj = (object)[];
+      $rtnObj->matched = false;
+
       if ($match->count()) {
         $newMatch = new Match;
         $newMatch->user_one_id = $request->header('swiper_id');
         $newMatch->user_two_id = $request->header('swipee_id');
         $newMatch->hackathon_id = $request->header('hackathon_id');
         $newMatch->save();
+        $rtnObj->matched = true;
       }
+
+      $myJSON = json_encode($rtnObj);
+
+      return $myJSON;
     }
 
     public function getUserIdFromToken($authToken)
