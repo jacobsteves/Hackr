@@ -29,7 +29,7 @@ class LoginScreen extends React.Component {
       "name": "Jacob Steves",
       "password": password
     }
-    this.props.actions.signup(userData);
+    this.props.actions.login(userData);
     // Hash stuff,
   }
 

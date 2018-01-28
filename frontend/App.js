@@ -15,7 +15,11 @@ const store = createStoreWithMiddleware(reducer);
 
 export default class App extends React.Component {
   render() {
-    return <SignupScreen/>
+    return (
+      <Provider store={store}>
+        <SignupScreen/>
+      </Provider>
+    );
     // return (
     //   <View style={styles.container}>
     //     <Text>Open up App.js to start working on your app!</Text>

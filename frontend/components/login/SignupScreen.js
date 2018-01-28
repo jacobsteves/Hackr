@@ -9,9 +9,10 @@ import {
   Text,
   Alert,
 } from 'react-native';
+import { signup } from '../../actions/ProfileActions'
 import styles from '../../stylesheets/LoginStyles'
 
-export default class SignupScreen extends React.Component {
+class SignupScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,6 +55,13 @@ export default class SignupScreen extends React.Component {
       return;
     }
 
+    let userData = {
+      "email": email,
+      "name": name,
+      "password": password,
+      "universty": universty,
+    }
+    this.props.actions.signup(userData);
 
   }
 
@@ -103,3 +111,20 @@ export default class SignupScreen extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    userData: state.profile.userData,
+    authToken: state.profile.authToken,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      signup
+    }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);
