@@ -19,6 +19,12 @@ class LoginScreen extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.success) {
+      this.props.changeView('Browse')
+    }
+  }
+
   onPressLogin() {
     // Do the login
     const { email, password } = this.state;
@@ -62,6 +68,7 @@ function mapStateToProps(state) {
   return {
     userData: state.profile.userData,
     authToken: state.profile.authToken,
+    success: state.profile.success
   };
 }
 
