@@ -27,7 +27,7 @@ export default class EntryScreen extends React.Component {
       <View style={styles.container}>
       <Image
         style={styles.mainLogo}
-        source={require('../../assets/main-logo.png')}
+        source={require('../../assets/images/main-logo.png')}
         resizeMode='contain'/>
       <Button
         onPress={() => this.props.changeView('SignupScreen')}

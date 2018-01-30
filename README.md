@@ -1,10 +1,18 @@
 <p align="center">
-  <img src="frontend/assets/main-logo.png" height="200px"/>
+  <img src="frontend/assets/images/main-logo.png" height="200px"/>
 </p>
 
 A mobile application aimed to match hackathon members with groups. Created the mobile app with react-native, and the backend api endpoints in PHP and laravel. Created during DeltaHacks.
 
 Created by [David Negrazis](https://github.com/davidnegrazis), [Drake Morin](https://github.com/drakemorin), and [Jacob Steves](https://github.com/jacobsteves)
+
+Skills Card                         |  Matches
+:----------------------------------:|:-------------------------:
+[](frontend/assets/demo/card.png)   |  [](frontend/assets/demo/matches.png)
+
+Sign Up                               |  More About the Hacker
+:------------------------------------:|:-------------------------:
+[](frontend/assets/demo/signup.png)   |  [](frontend/assets/demo/more-info.png)
 
 # Getting Started
 ## Prerequisites
@@ -81,7 +89,7 @@ npm install && npm start
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jacobsteves/Hackr/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jacobsteves/Hackr/tags).
 
 ## License
 

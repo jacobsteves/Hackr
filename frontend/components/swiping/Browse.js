@@ -166,7 +166,7 @@ class Browse extends React.Component {
                   <Image
                     resizeMode='contain'
                     style={[]}
-                    source={require('../../images/cross.png')}/>
+                    source={require('../../assets/images/cross.png')}/>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress = {() => this.onPressAccept()}
@@ -174,7 +174,7 @@ class Browse extends React.Component {
                   <Image
                     resizeMode='contain'
                     style={[]}
-                    source={require('../../images/checkmark.png')}/>
+                    source={require('../../assets/images/checkmark.png')}/>
                 </TouchableHighlight>
             </View>
           </View>

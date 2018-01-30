@@ -77,7 +77,7 @@ class SignupScreen extends React.Component {
       <View style={styles.container}>
         <Image
           style={styles.mainLogo}
-          source={require('../../assets/main-logo.png')}
+          source={require('../../assets/images/main-logo.png')}
           resizeMode='contain'/>
         <Text
           style={styles.text}>Name:</Text>
