@@ -6,13 +6,20 @@ A mobile application aimed to match hackathon members with groups. Created the m
 
 Created by [David Negrazis](https://github.com/davidnegrazis), [Drake Morin](https://github.com/drakemorin), and [Jacob Steves](https://github.com/jacobsteves)
 
-Skills Card                         |  Matches
-:----------------------------------:|:-------------------------:
-[](frontend/assets/demo/card.png)   |  [](frontend/assets/demo/matches.png)
+Sign Up |  More About the Hacker | Skills Card | Matches
+:----------:|:-------:|:-------:|:-------:
+![](frontend/assets/demo/signup.png) | ![](frontend/assets/demo/more-info.png) | ![](frontend/assets/demo/card.png) | ![](frontend/assets/demo/matches.png)
 
-Sign Up                               |  More About the Hacker
-:------------------------------------:|:-------------------------:
-[](frontend/assets/demo/signup.png)   |  [](frontend/assets/demo/more-info.png)
+# Technologies
+### Backend
+The backend was developed in PHP using a [Laravel](https://laravel.com/) framework.
+
+The entire web api was engineered from scratch. Calls to `http://app/api/action` return various JSON objects depending on the action. User authentication was also handled, ensuring that the user must be signed in with an active Authentication Token in order to access the apps data.
+
+### Frontend
+The frontend was developed in JavaScript, [React-Native](https://facebook.github.io/react-native/), and [Redux](https://redux.js.org/docs/introduction/). 
+
+There are various components, actions, and reducers in the app that give the app functionality and global state. The app touches the React-Native app lifestyle, as well as state handling and asyncronous storage. To grab the app data, some actions make ajax REST api requests to our web hosted backend.
 
 # Getting Started
 ## Prerequisites
