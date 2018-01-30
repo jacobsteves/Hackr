@@ -10,6 +10,21 @@ Sign Up |  More About the Hacker | Skills Card | Matches
 :----------:|:-------:|:-------:|:-------:
 ![](frontend/assets/demo/signup.png) | ![](frontend/assets/demo/more-info.png) | ![](frontend/assets/demo/card.png) | ![](frontend/assets/demo/matches.png)
 
+## Table of Contents
+- [Technologies](#technologies)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+- [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+        - [Backend Hosting](#backend-hosting)
+        - [Frontend Hosting](#frontend-hosting)
+    - [Installation](#installation)
+        - [Installing Laravel](#installing-laravel)
+        - [Starting the PHP Server](#starting-the-php-server)
+        - [Starting the Frontend](#starting-the-frontend)
+- [Versioning](#versioning)
+- [License](#license)
+
 # Technologies
 ### Backend
 The backend was developed in PHP using a [Laravel](https://laravel.com/) framework.
@@ -23,17 +38,12 @@ There are various components, actions, and reducers in the app that give the app
 
 # Getting Started
 ## Prerequisites
-### Backend
+### Backend Hosting
 - PHP version 7.1, to install (on mac), run:
 ```
 curl -s http://php-osx.liip.ch/install.sh | bash -s 7.1
 ```
-- Download [Ngrok](https://ngrok.com/3)
 
-### Frontend
-- Download the [Expo](https://expo.io/) mobile application
-
-## Installing Laravel
 - Install composer. Run:
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -48,6 +58,13 @@ This will add composer to the current directory.
 mv composer.phar /usr/local/bin/composer
 ```
 
+- Download [Ngrok](https://ngrok.com/3)
+
+### Frontend Hosting
+- Download the [Expo](https://expo.io/) mobile application
+
+## Installation
+### Installing Laravel
 - Install Laravel Globally. Run:
 ```
 composer global require "laravel/installer"
@@ -69,7 +86,7 @@ to install all the dependancies
 - copy `.env.example` to `.env`
      - Note: `.env` is specific to each project, never commit this file
 
-## Starting the PHP Server
+### Starting the PHP Server
 - You must generate an application encryption key. Do so by running this command:
 ```
 php artisan key:generate
@@ -85,7 +102,7 @@ ngrok http 8000
 ```
 and update APP_BACKEND_URL in `/frontend/actions/ActionTypes.js` to be the url given by Ngrok
 
-## Front End Installation
+### Starting the Frontend
 - Run:
 ```
 npm install && npm start
